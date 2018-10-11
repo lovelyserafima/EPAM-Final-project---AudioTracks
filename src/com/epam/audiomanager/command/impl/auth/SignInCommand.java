@@ -11,7 +11,6 @@ import com.epam.audiomanager.util.constant.ConstantMessages;
 import com.epam.audiomanager.util.constant.ConstantPathPages;
 import com.epam.audiomanager.util.property.ConfigurationManager;
 import com.epam.audiomanager.util.property.MessageManager;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 

@@ -24,7 +24,6 @@ public class ConnectorDb {
             String pass = resourceBundle.getString(PASSWORD);
             return new ProxyConnection(DriverManager.getConnection(url, user, pass));
         } catch (ClassNotFoundException | SQLException e) {
-            //TODO catching
             LOGGER.error("Problem with database", e);
             throw new RuntimeException("Problem with database", e);
         }

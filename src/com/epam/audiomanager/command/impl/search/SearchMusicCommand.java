@@ -4,7 +4,7 @@ import com.epam.audiomanager.command.Command;
 import com.epam.audiomanager.controller.Router;
 import com.epam.audiomanager.entity.audio.AudioTrack;
 import com.epam.audiomanager.exception.ProjectException;
-import com.epam.audiomanager.logic.find.SearchMusicLogic;
+import com.epam.audiomanager.logic.SearchMusicLogic;
 import com.epam.audiomanager.util.constant.ConstantAttributes;
 import com.epam.audiomanager.util.constant.ConstantMessages;
 import com.epam.audiomanager.util.constant.ConstantPathPages;

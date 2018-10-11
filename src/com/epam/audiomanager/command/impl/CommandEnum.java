@@ -8,8 +8,9 @@ import com.epam.audiomanager.command.impl.basket.BuyCommand;
 import com.epam.audiomanager.command.impl.language.EnglishLanguageCommand;
 import com.epam.audiomanager.command.impl.language.RussianLanguageCommand;
 import com.epam.audiomanager.command.impl.main.MainCommand;
+import com.epam.audiomanager.command.impl.medialibrary.ConfirmFeedbackCommand;
+import com.epam.audiomanager.command.impl.medialibrary.GiveFeedbackCommand;
 import com.epam.audiomanager.command.impl.medialibrary.MediaLibraryCommand;
-import com.epam.audiomanager.command.impl.pageclicker.*;
 import com.epam.audiomanager.command.impl.profile.*;
 import com.epam.audiomanager.command.impl.auth.registration.ConfirmRegistrationCommand;
 import com.epam.audiomanager.command.impl.auth.registration.RegisterCommand;
@@ -25,7 +26,8 @@ public enum CommandEnum {
     SEARCH_MUSIC(new SearchMusicCommand()), EDIT_PARAMETRES(new EditParametresCommand()),
     CONFIRM_EDITING_PARAMETRES(new ConfirmEditingParametresCommand()), ADD_TO_BASKET(new AddToBasketCommand()),
     BASKET(new BasketCommand()), MEDIA_LIBRARY(new MediaLibraryCommand()), BUY(new BuyCommand()),
-    TOP_UP_ACCOUNT(new TopUpAccountCommand());
+    TOP_UP_ACCOUNT(new TopUpAccountCommand()), CONFIRM_TOPPING_UP(new ConfirmToppingUpCommand()),
+    GIVE_FEEDBACK(new GiveFeedbackCommand()), CONFIRM_FEEDBACK(new ConfirmFeedbackCommand());
 
     private Command command;
 

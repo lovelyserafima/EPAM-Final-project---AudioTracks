@@ -52,6 +52,10 @@ public class ChangeParametresLogic {
         try{
             daoManager.startDAO(userDAO);
             userDAO.updateUserMoney(clientID, clientMoney, changes);
+            daoManager.commit();
+        } catch (ProjectException e) {
+            daoManager.rollback();
+            throw e;
         } finally {
             daoManager.endDAO();
         }

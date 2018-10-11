@@ -7,7 +7,6 @@ import com.epam.audiomanager.entity.user.TypeUser;
 import com.epam.audiomanager.entity.user.User;
 import com.epam.audiomanager.exception.ProjectException;
 import com.epam.audiomanager.util.constant.ConstantAttributes;
-
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +18,8 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     private static final String FIND_USER_BY_EMAIL_AND_PASSWORD = "select * from User where email = ? and password = ?";
     private static final String FIND_USER_BY_EMAIL = "select * from User where email = ?";
     private static final String FIND_USER_BY_LOGIN = "select * from User where login = ?";
-    private static final String FIND_CLIENT_BY_ID = "select * from Client where                                                                  user_id = ?";
+    private static final String FIND_CLIENT_BY_ID = "select * from Client where user_id = ?";
+
     private static final String INSERT_USER = "insert into User(login, password, role, first_name, second_name, email) " +
             "values(?, ?, ?, ?, ?, ?)";
     private static final String INSERT_CLIENT = "insert into Client(bonus) values(?)";
@@ -213,7 +213,8 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         return new Client(resultSet.getInt(1), resultSet.getString(2),
                 TypeUser.valueOf(resultSet.getString(4).toUpperCase()),
                 resultSet.getString(5), resultSet.getString(6),
-                resultSet.getString(7), resultSetForClient.getBoolean(2));
+                resultSet.getString(7), resultSetForClient.getBoolean(2),
+                resultSetForClient.getBigDecimal(3));
     }
 
     public void insert(User user, String encryptedPassword) throws ProjectException {

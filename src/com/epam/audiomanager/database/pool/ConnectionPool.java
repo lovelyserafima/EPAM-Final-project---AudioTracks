@@ -3,7 +3,6 @@ package com.epam.audiomanager.database.pool;
 import com.epam.audiomanager.exception.ProjectException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,14 +14,14 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool{
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
-    private BlockingQueue<Connection> connectionQueue;
-    private final int DEFAULT_POOL_SIZE = 30;
+    private BlockingQueue<ProxyConnection> connectionQueue;
+    private final int DEFAULT_POOL_SIZE = 50;
     private static AtomicBoolean instanceCreated  = new AtomicBoolean();
     private static ConnectionPool instance;
     private static ReentrantLock lock = new ReentrantLock();
 
     private ConnectionPool(){
-        connectionQueue = new LinkedBlockingQueue<>(DEFAULT_POOL_SIZE);
+        connectionQueue = new LinkedBlockingQueue<>();
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++){
             ProxyConnection connection = ConnectorDb.getConnection();
             connectionQueue.offer(connection);
@@ -44,8 +43,8 @@ public class ConnectionPool{
         return instance;
     }
 
-    public Connection getConnection() throws ProjectException {
-        Connection connection;
+    public ProxyConnection getConnection() throws ProjectException {
+        ProxyConnection connection;
         try {
             connection = connectionQueue.take();
         } catch (InterruptedException e) {
@@ -55,14 +54,18 @@ public class ConnectionPool{
         return connection;
     }
 
-    public void releaseConnection(Connection connection){
-        connectionQueue.offer(connection);
+    public void releaseConnection(ProxyConnection connection){
+        try {
+            connectionQueue.put(connection);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void closePool() {
         try {
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
-                connectionQueue.take().close();
+                connectionQueue.take().closeConnection();
             }
             derigesterDrivers();
         } catch (SQLException e) {

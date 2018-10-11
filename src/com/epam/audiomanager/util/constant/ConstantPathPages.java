@@ -14,4 +14,6 @@ public class ConstantPathPages {
     public static final String PATH_PAGE_MAIN_CLIENT_CHANGE_PARAMETRES = "path.page.mainPageClientChangeParametres";
     public static final String PATH_PAGE_MAIN_CLIENT_BASKET = "path.page.mainPageClientBasket";
     public static final String PATH_PAGE_MAIN_CLIENT_MEDIA_LIBRARY = "path.page.mainPageClientMediaLibrary";
+    public static final String PATH_PAGE_MAIN_CLIENT_TOP_UP_ACCOUNT = "path.page.mainPageClientTopUpAccount";
+    public static final String PATH_PAGE_MAIN_CLIENT_GIVE_FEEDBACK = "path.page.mainPageClientGiveFeedback";
 }

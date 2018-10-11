@@ -27,8 +27,11 @@ public class MediaLibraryCommand implements Command {
         HttpSession httpSession = httpServletRequest.getSession();
         MessageManager messageManager = MessageManager.defineLocale((String) httpSession.getAttribute(
                 ConstantAttributes.CHANGE_LANGUAGE));
+        httpServletRequest.setAttribute(ConstantAttributes.BAD_RESULT_OF_REPLY, null);
+        httpServletRequest.setAttribute(ConstantAttributes.GOOD_RESULT_OF_REPLY, null);
         if (!audioTracks.isEmpty()){
             httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS, audioTracks);
+            httpSession.setAttribute(ConstantAttributes.MEDIA_LIBRARY_TRACKS, audioTracks);
         } else {
             httpServletRequest.setAttribute(ConstantAttributes.NO_TRACKS,
                     messageManager.getMessage(ConstantMessages.NO_TRACKS));

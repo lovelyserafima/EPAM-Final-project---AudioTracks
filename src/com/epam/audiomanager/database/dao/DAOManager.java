@@ -1,6 +1,7 @@
 package com.epam.audiomanager.database.dao;
 
 import com.epam.audiomanager.database.pool.ConnectionPool;
+import com.epam.audiomanager.database.pool.ProxyConnection;
 import com.epam.audiomanager.exception.ProjectException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class DAOManager {
     private static final Logger LOGGER = LogManager.getLogger(DAOManager.class);
-    private Connection connection;
+    private ProxyConnection connection;
     private List<AbstractDAO> abstractDAOS;
 
     public DAOManager(){

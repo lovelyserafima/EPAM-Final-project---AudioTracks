@@ -16,10 +16,12 @@ public class Client extends User {
         this.bonus = bonus;
     }
 
-    public Client(int id, String login, TypeUser type, String firstName, String secondName, String email, boolean bonus)
+    public Client(int id, String login, TypeUser type, String firstName, String secondName, String email, boolean bonus,
+                  BigDecimal money)
     {
         super(id, login, type, firstName, secondName, email);
         this.bonus = bonus;
+        this.money = money;
     }
 
     public boolean isBonus() {

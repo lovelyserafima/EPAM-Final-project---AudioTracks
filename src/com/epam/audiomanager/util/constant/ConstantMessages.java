@@ -20,4 +20,6 @@ public class ConstantMessages {
     public static final String TRACK_WAS_BOUGHT_SUCCESSFULLY = "message.trackWasBought";
     public static final String NOT_ENOUGH_MONEY = "message.errorNotEnoughMoney";
     public static final String ALREADY_EXISTS_IN_MEDIA_LIBRARY = "message.errorAlreadyExistsInMediaLibrary";
+    public static final String ALREADY_EXISTS_FEEDBACK = "message.errorAlreadyExistsFeedback";
+    public static final String THANK_YOU_FOR_REPLY = "message.goodResultOfReply";
 }

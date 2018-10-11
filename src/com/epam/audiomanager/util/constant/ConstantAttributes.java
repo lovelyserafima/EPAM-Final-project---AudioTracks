@@ -32,5 +32,9 @@ public class ConstantAttributes {
     public static final String NO_TRACKS = "noTracks";
     public static final String RESULT_OF_SUCCESSFULL_BUYING = "resultOfSuccessfullBuying";
     public static final String RESULT_OF_WRONG_BUYING = "resultOfWrongBuying";
-
+    public static final String ADDED_MONEY = "addedMoney";
+    public static final String REPLY = "reply";
+    public static final String BAD_RESULT_OF_REPLY = "badResultOfReply";
+    public static final String GOOD_RESULT_OF_REPLY = "goodResultOfReply";
+    public static final String MEDIA_LIBRARY_TRACKS = "mediaTracks";
 }
