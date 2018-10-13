@@ -12,16 +12,17 @@ public class ConstantAttributes {
     public static final String CONFIRM_CODE = "confirmCode";
     public static final String ADMIN = "ADMIN";
     public static final String CLIENT = "client";
+    public static final String ROLE = "role";
     public static final String ENCRYPTED_PASSWORD = "encryptedPassword";
     public static final String ERROR_CONFIRM_CODE = "errorWrongConfirmCode";
     public static final String AUDIO_TRACKS = "audioTracks";
     public static final String USER = "user";
+    public static final String USERS = "users";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String NEW_PASSWORD = "newPassword";
     public static final String SAME_PASSWORD = "samePassword";
     public static final String LOGIN = "login";
-    public static final String PRICE = "price";
     public static final String FIRST_NAME = "firstName";
     public static final String SECOND_NAME = "secondName";
     public static final String RESULT_CHANGING = "resultChanging";
@@ -37,4 +38,6 @@ public class ConstantAttributes {
     public static final String BAD_RESULT_OF_REPLY = "badResultOfReply";
     public static final String GOOD_RESULT_OF_REPLY = "goodResultOfReply";
     public static final String MEDIA_LIBRARY_TRACKS = "mediaTracks";
+    public static final String AUDIO_TRACK = "audioTrack";
+    public static final String NO_USERS = "noUsers";
 }

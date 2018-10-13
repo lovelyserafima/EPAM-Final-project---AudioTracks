@@ -8,7 +8,10 @@ public class ConstantPathPages {
     public static final String PATH_PAGE_CONFIRM = "path.page.confirm";
     public static final String PATH_PAGE_MAIN_ADMIN = "path.page.mainPageAdmin";
     public static final String PATH_PAGE_MAIN_CLIENT = "path.page.mainPageClientMain";
+
     public static final String PATH_PAGE_MAIN_CLIENT_SEARCH = "path.page.mainPageClientSearch";
+    public static final String PATH_PAGE_MAIN_ADMIN_SEARCH = "path.page.mainPageAdminSearch";
+
     public static final String PATH_PAGE_MAIN_CLIENT_PROFILE = "path.page.mainPageClientProfile";
     public static final String PATH_PAGE_MAIN_CLIENT_CHANGE_PASSWORD = "path.page.mainPageClientChangePassword";
     public static final String PATH_PAGE_MAIN_CLIENT_CHANGE_PARAMETRES = "path.page.mainPageClientChangeParametres";
@@ -16,4 +19,6 @@ public class ConstantPathPages {
     public static final String PATH_PAGE_MAIN_CLIENT_MEDIA_LIBRARY = "path.page.mainPageClientMediaLibrary";
     public static final String PATH_PAGE_MAIN_CLIENT_TOP_UP_ACCOUNT = "path.page.mainPageClientTopUpAccount";
     public static final String PATH_PAGE_MAIN_CLIENT_GIVE_FEEDBACK = "path.page.mainPageClientGiveFeedback";
+
+    public static final String PATH_PAGE_MAIN_ADMIN_READ_MORE_AUDIO = "path.page.mainPageAdminReadMoreAudio";
 }

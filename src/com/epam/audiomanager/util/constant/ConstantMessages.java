@@ -22,4 +22,5 @@ public class ConstantMessages {
     public static final String ALREADY_EXISTS_IN_MEDIA_LIBRARY = "message.errorAlreadyExistsInMediaLibrary";
     public static final String ALREADY_EXISTS_FEEDBACK = "message.errorAlreadyExistsFeedback";
     public static final String THANK_YOU_FOR_REPLY = "message.goodResultOfReply";
+    public static final String NOBODY_BOUGHT_IT = "message.nobodyBoughtIt";
 }

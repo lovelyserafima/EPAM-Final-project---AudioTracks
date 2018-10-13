@@ -1,7 +1,7 @@
 package com.epam.audiomanager.command;
 
-import com.epam.audiomanager.command.impl.CommandEnum;
-import com.epam.audiomanager.command.impl.DefaultCommand;
+import com.epam.audiomanager.command.impl.common.CommandEnum;
+import com.epam.audiomanager.command.impl.common.DefaultCommand;
 import javax.servlet.http.HttpServletRequest;
 
 public class ActionFactory {

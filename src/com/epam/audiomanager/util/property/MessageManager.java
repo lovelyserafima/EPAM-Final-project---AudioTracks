@@ -5,10 +5,7 @@ import com.epam.audiomanager.util.constant.ConstantLocales;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public enum MessageManager {
-    EN(ResourceBundle.getBundle(ConstantBundles.MESSAGE, new Locale(ConstantLocales.ENGLISH_LOCALE))),
-    RU(ResourceBundle.getBundle(ConstantBundles.MESSAGE, new Locale(ConstantLocales.RUSSIAN_LOCALE)));
-
+public class MessageManager {
     private ResourceBundle resourceBundle;
 
     MessageManager(ResourceBundle resourceBundle){
@@ -22,9 +19,20 @@ public enum MessageManager {
     public static MessageManager defineLocale(String locale){
         MessageManager messageManager = null;
         if (locale == null){
-            messageManager = messageManager.RU;
+            messageManager = new MessageManager(ResourceBundle.getBundle(ConstantBundles.MESSAGE,
+                    new Locale(ConstantLocales.RUSSIAN_LOCALE)));
+        } else {
+            switch (locale){
+                case ConstantLocales.ENGLISH_LOCALE:
+                    messageManager = new MessageManager(ResourceBundle.getBundle(ConstantBundles.MESSAGE,
+                            new Locale(ConstantLocales.ENGLISH_LANGUAGE, ConstantLocales.US)));
+                    break;
+                case ConstantLocales.RUSSIAN_LOCALE:
+                    messageManager = new MessageManager(ResourceBundle.getBundle(ConstantBundles.MESSAGE,
+                            new Locale(ConstantLocales.RUSSIAN_LANGUAGE, ConstantLocales.RUSSIA)));
+                    break;
+            }
         }
-        messageManager = (ConstantLocales.ENGLISH_LOCALE.equals(locale)) ? messageManager.EN : messageManager.RU;
         return messageManager;
     }
 

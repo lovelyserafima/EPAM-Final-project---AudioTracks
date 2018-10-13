@@ -19,6 +19,9 @@ public class AudioTrackDAO extends AbstractDAO {
     private static final String FIND_AUDIO_TRACKS_BY_SMTH = "select AudioTrack.id, AudioTrack.name, AudioTrack.artist, " +
             "AudioTrack.year, AudioTrack.price, full_audio_path, demo_audio_path, Album.name from AudioTrack join Album " +
             "on album_id = Album.id where AudioTrack.name = ? or Album.name = ? or AudioTrack.artist = ?";
+    private static final String FIND_AUDIO_TRACK_BY_ID = "select AudioTrack.id, AudioTrack.name, AudioTrack.artist, " +
+            "AudioTrack.year, AudioTrack.price, full_audio_path, demo_audio_path, Album.name from AudioTrack join Album " +
+            "on album_id = Album.id where AudioTrack.id = ?";
     private static final String INSERT_AUDIOTRACK_INTO_MEDIATRACK_LIBRARY = "insert into MediaLibrary(audio_id, user_id) " +
             "values(?, ?)";
 
@@ -47,6 +50,31 @@ public class AudioTrackDAO extends AbstractDAO {
             }
         }
         return audioTracks;
+    }
+
+    public AudioTrack findByAudioId(int audioId) throws ProjectException {
+        PreparedStatement preparedStatement = null;
+        AudioTrack audioTrack = null;
+        try{
+            preparedStatement = connection.prepareStatement(FIND_AUDIO_TRACK_BY_ID);
+            preparedStatement.setInt(1, audioId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                audioTrack = new AudioTrack(resultSet.getInt(1),
+                        resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getInt(4), resultSet.getBigDecimal(5),
+                        resultSet.getString(6), resultSet.getString(7),
+                        resultSet.getString(8));
+            }
+        } catch (SQLException e){
+            throw new ProjectException("SQLException, searching audio by id");
+        } finally {
+            if (connection != null){
+                close(preparedStatement);
+                ConnectionPool.getInstance().releaseConnection(connection);
+            }
+        }
+        return audioTrack;
     }
 
     @Override
