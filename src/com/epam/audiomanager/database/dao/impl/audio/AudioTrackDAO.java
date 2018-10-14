@@ -5,6 +5,7 @@ import com.epam.audiomanager.database.pool.ConnectionPool;
 import com.epam.audiomanager.entity.audio.AudioTrack;
 import com.epam.audiomanager.exception.ProjectException;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,15 +16,19 @@ import java.util.List;
 public class AudioTrackDAO extends AbstractDAO {
     private static final String FIND_ALL_AUDIO_TRACKS = "select AudioTrack.id, AudioTrack.name, AudioTrack.artist, " +
             "AudioTrack.year, AudioTrack.price, full_audio_path, demo_audio_path, Album.name from AudioTrack join Album " +
-            "on album_id = Album.id";
+            "on album_id = Album.id where available = 1";
     private static final String FIND_AUDIO_TRACKS_BY_SMTH = "select AudioTrack.id, AudioTrack.name, AudioTrack.artist, " +
             "AudioTrack.year, AudioTrack.price, full_audio_path, demo_audio_path, Album.name from AudioTrack join Album " +
-            "on album_id = Album.id where AudioTrack.name = ? or Album.name = ? or AudioTrack.artist = ?";
+            "on album_id = Album.id where AudioTrack.name = ? or Album.name = ? or AudioTrack.artist = ? and " +
+            "available = 1";
     private static final String FIND_AUDIO_TRACK_BY_ID = "select AudioTrack.id, AudioTrack.name, AudioTrack.artist, " +
             "AudioTrack.year, AudioTrack.price, full_audio_path, demo_audio_path, Album.name from AudioTrack join Album " +
             "on album_id = Album.id where AudioTrack.id = ?";
     private static final String INSERT_AUDIOTRACK_INTO_MEDIATRACK_LIBRARY = "insert into MediaLibrary(audio_id, user_id) " +
             "values(?, ?)";
+    private static final String UPDATE_AUDIO_TRACK = "update AudioTrack set album_id = ?, name = ?, artist = ?, year = ?," +
+            " price = ?, full_audio_path = ?, demo_audio_path = ? where id = ?";
+    //private static final String FIND_ALBUM
 
     @Override
     public List findAll() throws ProjectException {
@@ -79,7 +84,7 @@ public class AudioTrackDAO extends AbstractDAO {
 
     @Override
     public boolean findByID(int... id) throws ProjectException {
-        return false;
+       return false;
     }
 
     public List findAudioTracksBySmth(String entity) throws ProjectException {
@@ -119,6 +124,30 @@ public class AudioTrackDAO extends AbstractDAO {
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new ProjectException("SQLException, Buying audiotrack", e);
+        } finally {
+            if (connection != null){
+                close(preparedStatement);
+                ConnectionPool.getInstance().releaseConnection(connection);
+            }
+        }
+    }
+
+    public void update(int audioId, Integer albumId, String name, String band, int year, BigDecimal price,
+                       String demoAudioPath, String fullAudioPath) throws ProjectException {
+        PreparedStatement preparedStatement = null;
+        try{
+            preparedStatement = connection.prepareStatement(UPDATE_AUDIO_TRACK);
+            preparedStatement.setInt(1, albumId);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, band);
+            preparedStatement.setInt(4, year);
+            preparedStatement.setBigDecimal(5, price);
+            preparedStatement.setString(6, fullAudioPath);
+            preparedStatement.setString(7, demoAudioPath);
+            preparedStatement.setInt(8, audioId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ProjectException("SQLException, editing audiotrack", e);
         } finally {
             if (connection != null){
                 close(preparedStatement);

@@ -3,6 +3,7 @@ package com.epam.audiomanager.database.dao.impl;
 import com.epam.audiomanager.database.dao.AbstractDAO;
 import com.epam.audiomanager.database.pool.ConnectionPool;
 import com.epam.audiomanager.entity.audio.AudioTrack;
+import com.epam.audiomanager.entity.user.User;
 import com.epam.audiomanager.exception.ProjectException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +21,8 @@ public class BasketDAO extends AbstractDAO {
             "on AudioTrack.artist = Album.artist where User.id = ? and available = 1";
     private static final String DELETE_ORDER_FROM_BASKET_BY_ID = "update Basket set available = 0 " +
             "where user_id = ? and audiotrack_id = ?";
+    private static final String FIND_ALL_USERS_WANTING_TO_BUY_TRACK = "select id, login from User join Basket " +
+            "on User.id = Basket.user_id where audiotrack_id = ? and available = 1";
 
 
     public boolean insertOrder(int clientId, int audioId) throws ProjectException {
@@ -65,6 +68,27 @@ public class BasketDAO extends AbstractDAO {
             }
         }
         return audioTracks;
+    }
+
+    public List<User> findUsersWantingToBuy(int audioId) throws ProjectException {
+        PreparedStatement preparedStatement = null;
+        List<User> users = new ArrayList<>();
+        try{
+            preparedStatement = connection.prepareStatement(FIND_ALL_USERS_WANTING_TO_BUY_TRACK);
+            preparedStatement.setInt(1, audioId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                users.add(new User(resultSet.getInt(1), resultSet.getString(2)));
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("SQLException, searching users wanting to buy", e);
+        } finally {
+            if (connection != null){
+                close(preparedStatement);
+                ConnectionPool.getInstance().releaseConnection(connection);
+            }
+        }
+        return users;
     }
 
     @Override

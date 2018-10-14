@@ -1,61 +1,48 @@
-/*
 package com.epam.audiomanager.database.dao.impl;
 
 import com.epam.audiomanager.database.dao.AbstractDAO;
 import com.epam.audiomanager.entity.Entity;
 import com.epam.audiomanager.database.pool.ConnectionPool;
 import com.epam.audiomanager.database.pool.ProxyConnection;
+import com.epam.audiomanager.exception.ProjectException;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class AlbumDAO extends AbstractDAO {
-    private static final String SHOW_ALL_INFORMATION = "select * from Album";
-
-    public AlbumDAO(ProxyConnection pool) {
-
-    }
-
+    private static final String FIND_ALBUM_BY_NAME_AND_BAND = "select id from Album where name = ? and artist = ?";
     @Override
-    public void findAll() {
-        Statement statement = null;
-        try{
-            statement = pool.createStatement();
-            ResultSet resultSet = statement.executeQuery(SHOW_ALL_INFORMATION);
-            while(resultSet.next()){
-                LOGGER.info(resultSet.getInt(1) + " " + resultSet.getString(2) + " "
-                        + resultSet.getString(3) + " " + resultSet.getInt(4) + " "
-                        + resultSet.getBigDecimal(5));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (pool != null){
-                close(statement);
-                ConnectionPool.getInstance().releaseConnection(pool);
-            }
-        }
-    }
-
-    @Override
-    public Entity findEntityById(int id) {
+    public List findAll() throws ProjectException {
         return null;
     }
 
-    @Override
-    public void insert(Object... objects) {
-
+    public Integer findByNameAndBand(String name, String band) throws ProjectException {
+        PreparedStatement preparedStatement = null;
+        Integer id = null;
+        try{
+            preparedStatement = connection.prepareStatement(FIND_ALBUM_BY_NAME_AND_BAND);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, band);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                id = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("SQLException, searching album by name and band");
+        } finally {
+            if (connection != null){
+                close(preparedStatement);
+                ConnectionPool.getInstance().releaseConnection(connection);
+            }
+        }
+        return id;
     }
 
     @Override
-    public void deleteById(int id) {
-
-    }
-
-    @Override
-    public void update(String name, int id) {
-
+    public boolean findByID(int... id) throws ProjectException {
+        return false;
     }
 }
-*/

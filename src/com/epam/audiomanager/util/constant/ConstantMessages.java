@@ -23,4 +23,9 @@ public class ConstantMessages {
     public static final String ALREADY_EXISTS_FEEDBACK = "message.errorAlreadyExistsFeedback";
     public static final String THANK_YOU_FOR_REPLY = "message.goodResultOfReply";
     public static final String NOBODY_BOUGHT_IT = "message.nobodyBoughtIt";
+    public static final String WRONG_ALBUM = "message.wrongAlbum";
+    public static final String WRONG_PRICE = "message.wrongPrice";
+    public static final String WRONG_YEAR = "message.wrongYear";
+    public static final String NOBODY_WANTS_TO_BUY_IT_NOW = "message.nobodyWantsToBuyIt";
+    public static final String NO_REPLIES = "message.noReplies";
 }

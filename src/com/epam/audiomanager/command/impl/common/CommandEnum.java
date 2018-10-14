@@ -1,7 +1,11 @@
 package com.epam.audiomanager.command.impl.common;
 
 import com.epam.audiomanager.command.Command;
-import com.epam.audiomanager.command.impl.admin.audio.ReadMoreCommand;
+import com.epam.audiomanager.command.impl.admin.audio.*;
+import com.epam.audiomanager.command.impl.admin.audio.ShowRepliesAdminCommand;
+import com.epam.audiomanager.command.impl.client.search.BackSearchCommand;
+import com.epam.audiomanager.command.impl.client.search.ShowRepliesClientCommand;
+import com.epam.audiomanager.command.impl.common.auth.LogOutCommand;
 import com.epam.audiomanager.command.impl.common.auth.SignInCommand;
 import com.epam.audiomanager.command.impl.client.basket.AddToBasketCommand;
 import com.epam.audiomanager.command.impl.client.basket.BasketCommand;
@@ -29,7 +33,11 @@ public enum CommandEnum {
     BASKET(new BasketCommand()), MEDIA_LIBRARY(new MediaLibraryCommand()), BUY(new BuyCommand()),
     TOP_UP_ACCOUNT(new TopUpAccountCommand()), CONFIRM_TOPPING_UP(new ConfirmToppingUpCommand()),
     GIVE_FEEDBACK(new GiveFeedbackCommand()), CONFIRM_FEEDBACK(new ConfirmFeedbackCommand()),
-    READ_MORE(new ReadMoreCommand());
+    READ_MORE(new ReadMoreCommand()), EDIT_AUDIO(new EditAudioCommand()),
+    CONFIRM_EDITING_AUDIO(new ConfirmEditingAudioCommand()), WHO_LISTENS(new WhoListensCommand()),
+    BACK_READ_MORE(new BackReadMoreCommand()), WHO_WANTS_TO_BUY(new WhoWantsToBuyCommand()),
+    SHOW_REPLIES_ADMIN(new ShowRepliesAdminCommand()), SHOW_REPLIES_CLIENT(new ShowRepliesClientCommand()),
+    BACK_SEARCH(new BackSearchCommand());
 
     private Command command;
 

@@ -110,24 +110,19 @@
                         </tr>
                         </tbody>
                     </table>
-                    <h4><fmt:message key="label.usersHavingTrack"/></h4>
-                    <p class="text-danger">${noUsers}</p>
-                    <table class="table">
-                        <thead class="text-primary">
-                        <tr>
-                            <th>#</th>
-                            <th><fmt:message key="label.login"/></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${requestScope.users}" var="user">
-                            <tr>
-                                <td>${user.id}</td>
-                                <td>${user.login}</td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                    <button type="submit" name="command" value="Edit audio"><fmt:message key="label.edit"/></button>
+                    <button type="submit" name="command" value="Who listens">
+                        <fmt:message key="label.whoListens"/>
+                    </button>
+                    <button type="submit" name="command" value="Who wants to buy">
+                        <fmt:message key="label.whoWantsToBuy"/>
+                    </button>
+                    <button type="submit" name="command" value="Show replies admin">
+                        <fmt:message key="label.showReplies"/>
+                    </button>
+                    <button type="submit" name="command" value="Delete audio">
+                        <fmt:message key="label.delete"/>
+                    </button>
                 </form>
             </div>
         </div>
@@ -137,3 +132,5 @@
 
 </body>
 </html>
+
+<%----%>

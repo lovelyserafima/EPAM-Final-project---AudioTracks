@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `AudioTracks`.`AudioTrack` (
   `price` DECIMAL NOT NULL,
   `full_audio_path` VARCHAR(1000) NOT NULL,
   `demo_audio_path` VARCHAR(1000) NOT NULL,
+  `available` BIT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   INDEX `fk_AudioTrack_Album1_idx` (`album_id` ASC),
   CONSTRAINT `fk_AudioTrack_Album1`
@@ -133,12 +134,13 @@ COLLATE = utf8_general_ci;
 -- Table `AudioTracks`.`Reply`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AudioTracks`.`Reply` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `audio_id` BIGINT NOT NULL,
   `text` TINYTEXT NOT NULL,
   INDEX `ReplyUserFK_idx` (`user_id` ASC),
   INDEX `ReplyAudioTrackFK_idx` (`audio_id` ASC),
-  PRIMARY KEY (`user_id`, `audio_id`),
+  PRIMARY KEY (`id`, `user_id`, `audio_id`),
   CONSTRAINT `ReplyUserFK`
     FOREIGN KEY (`user_id`)
     REFERENCES `AudioTracks`.`User` (`id`)
@@ -224,7 +226,7 @@ INSERT INTO `AudioTracks`.`Album` (`id`, `name`, `artist`, `year`, `price`) VALU
 INSERT INTO `AudioTracks`.`Album` (`id`, `name`, `artist`, `year`, `price`) VALUES (12, 'Прекрасная любовь', 'ДДТ', 2007, 1600);
 INSERT INTO `AudioTracks`.`Album` (`id`, `name`, `artist`, `year`, `price`) VALUES (13, 'Без консервантов', 'Lumen', 2003, 1400);
 INSERT INTO `AudioTracks`.`Album` (`id`, `name`, `artist`, `year`, `price`) VALUES (14, 'Нажми на газ', 'Сектор газа', 1993, 1000);
-INSERT INTO `AudioTracks`.`Album` (`id`, `name`, `artist`, `year`, `price`) VALUES (15, '3000', 'Смысловые галлюцинации', 2000, 1300);
+INSERT INTO `AudioTracks`.`Album` (`id`, `name`, `artist`, `year`, `price`) VALUES (15, 'Stop!', 'Sam Brown', 1988, 1800);
 
 COMMIT;
 
@@ -234,22 +236,21 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `AudioTracks`;
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (1, 1, NULL, 'The Mountain', 'Three Days Grace', 2018, 100, '/assets/audio/full/three-days-grace-the-mountain.mp3', '/assets/audio/demo/three_days_grace_-_the_mountain.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (2, 2, NULL, 'Линия Жизни', 'Сплин', 2001, 100, '/assets/audio/full/Сплин–ЛинияЖизни(OSTБрат2).mp3', '/assets/audio/demo/2676.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (3, 3, NULL, 'The Vengeful One', 'Disturbed', 2015, 150, '/assets/audio/full/Disturbed-TheVengefulOne.mp3', '/assets/audio/demo/disturbed-the-vengeful-one.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (4, 4, NULL, 'The Lost Song', 'The Cat Empire', 2003, 130, '/assets/audio/full/TheCatEmpire–TheLostSong(OSTКухня).mp3', '/assets/audio/demo/the-cat-empire-the-lost-song.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (5, 5, NULL, 'Hero', 'Skillet', 2009, 160, '/assets/audio/full/skillet-hero.mp3', '/assets/audio/demo/skillet-hero.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (6, 6, NULL, 'Kill', '30 Seconds to Mars', 2005, 150, '/assets/audio/full/30-seconds-to-mars-the-kill-bury-me.mp3', '/assets/audio/demo/30-Seconds_to_Mars-Kill(demo).mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (7, 7, NULL, 'Crazy', 'Aerosmith', 1993, 160, '/assets/audio/full/Аэросмит–Crazy.mp3', '/assets/audio/demo/Aerosmith-Crazy.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (8, 8, NULL, 'Hotel California', 'Eagles', 1976, 200, '/assets/audio/full/eagles-hotel-california.mp3', '/assets/audio/demo/Eagles-Hotel_California.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (9, 9, NULL, 'Smells like teen spirit', 'Nirvana', 1991, 250, '/assets/audio/full/Nirvana—Smells_Like_Teen_Spirit.mp3', '/assets/audio/demo/Nirvana-Smells_like_teen_spirit.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (10, 10, NULL, 'We Are The Champions', 'Queen', 1977, 180, '/assets/audio/full/queen_-_we-are-the-champions.mp3', '/assets/audio/demo/Queen-Champions.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (11, 11, NULL, 'Still loving you', 'Scorpions', 1984, 190, '/assets/audio/full/scorpions_-_still-loving-you.mp3', '/assets/audio/demo/Scorpions-Still_loving_you.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (12, 12, NULL, 'Новая жизнь', 'ДДТ', 2007, 170, '/assets/audio/full/ДДТ–Новая_жизнь.mp3', '/assets/audio/demo/ДДТ-Новая_жизнь.mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (13, 13, NULL, 'Сид и Нэнси', 'Lumen', 2003, 140, '/assets/audio/full/Lumen–Сид_и_Нэнси.mp3', '/assets/audio/demo/Люмен-Сид_и_нэнси(демо).mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (14, 14, NULL, 'Лирика', 'Сектор газа', 1993, 135, '/assets/audio/full/Сектор_газа-Лирика.mp3', '/assets/audio/demo/Сектор_газа-Лирика(демо).mp3');
-INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`) VALUES (15, 15, NULL, 'Вечно молодой', 'Смысловые галлюцинации', 2000, 150, '/assets/audio/full/smyslovye_gallyucinacii_vechno_molodoj_(NaitiMP3.ru).mp3', '/assets/audio/demo/Смысловые_галлюцинации-Вечно_молодой.mp3');
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (1, 1, NULL, 'The Mountain', 'Three Days Grace', 2018, 100, '/assets/audio/full/three-days-grace-the-mountain.mp3', '/assets/audio/demo/three_days_grace_-_the_mountain.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (2, 2, NULL, 'Линия Жизни', 'Сплин', 2001, 100, '/assets/audio/full/Сплин–ЛинияЖизни(OSTБрат2).mp3', '/assets/audio/demo/2676.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (3, 3, NULL, 'The Vengeful One', 'Disturbed', 2015, 150, '/assets/audio/full/Disturbed-TheVengefulOne.mp3', '/assets/audio/demo/disturbed-the-vengeful-one.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (4, 4, NULL, 'The Lost Song', 'The Cat Empire', 2003, 130, '/assets/audio/full/TheCatEmpire–TheLostSong(OSTКухня).mp3', '/assets/audio/demo/the-cat-empire-the-lost-song.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (5, 5, NULL, 'Hero', 'Skillet', 2009, 160, '/assets/audio/full/skillet-hero.mp3', '/assets/audio/demo/skillet-hero.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (6, 6, NULL, 'Kill', '30 Seconds to Mars', 2005, 150, '/assets/audio/full/30-seconds-to-mars-the-kill-bury-me.mp3', '/assets/audio/demo/30-Seconds_to_Mars-Kill(demo).mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (7, 7, NULL, 'Crazy', 'Aerosmith', 1993, 160, '/assets/audio/full/Аэросмит–Crazy.mp3', '/assets/audio/demo/Aerosmith-Crazy.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (8, 8, NULL, 'Hotel California', 'Eagles', 1976, 200, '/assets/audio/full/eagles-hotel-california.mp3', '/assets/audio/demo/Eagles-Hotel_California.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (9, 9, NULL, 'Smells like teen spirit', 'Nirvana', 1991, 250, '/assets/audio/full/Nirvana—Smells_Like_Teen_Spirit.mp3', '/assets/audio/demo/Nirvana-Smells_like_teen_spirit.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (10, 10, NULL, 'We Are The Champions', 'Queen', 1977, 180, '/assets/audio/full/queen_-_we-are-the-champions.mp3', '/assets/audio/demo/Queen-Champions.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (11, 11, NULL, 'Still loving you', 'Scorpions', 1984, 190, '/assets/audio/full/scorpions_-_still-loving-you.mp3', '/assets/audio/demo/Scorpions-Still_loving_you.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (12, 12, NULL, 'Новая жизнь', 'ДДТ', 2007, 170, '/assets/audio/full/ДДТ–Новая_жизнь.mp3', '/assets/audio/demo/ДДТ-Новая_жизнь.mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (13, 13, NULL, 'Сид и Нэнси', 'Lumen', 2003, 140, '/assets/audio/full/Lumen–Сид_и_Нэнси.mp3', '/assets/audio/demo/Люмен-Сид_и_нэнси(демо).mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (14, 14, NULL, 'Лирика', 'Сектор газа', 1993, 135, '/assets/audio/full/Сектор_газа-Лирика.mp3', '/assets/audio/demo/Сектор_газа-Лирика(демо).mp3', NULL);
+INSERT INTO `AudioTracks`.`AudioTrack` (`id`, `album_id`, `assembly_id`, `name`, `artist`, `year`, `price`, `full_audio_path`, `demo_audio_path`, `available`) VALUES (15, 15, NULL, 'Stop', 'Sam Brown', 1988, 200, '/assets/audio/full/Sam_Brown-Stop', '/assets/audio/demo/Sam_Brown-Stop(demo).mp3', NULL);
 
 COMMIT;
-
 

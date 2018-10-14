@@ -1,5 +1,7 @@
 package com.epam.audiomanager.util.valid;
 
+import java.math.BigDecimal;
+
 public class Validation {
     private static final String CHECK_EMAIL = "[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@" +
             "([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\\.)*([a-z]{2,4})";
@@ -17,5 +19,11 @@ public class Validation {
     }
     public static boolean isCorrectLogin(String login){
         return login.length() <= MAX_LOGIN_LENGTH;
+    }
+    public static boolean isCorrectYear(int year){
+        return year > 0;
+    }
+    public static boolean isCorrectPrice(BigDecimal price){
+        return price.doubleValue() > 0;
     }
 }

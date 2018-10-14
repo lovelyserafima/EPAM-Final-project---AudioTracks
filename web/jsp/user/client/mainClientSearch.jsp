@@ -47,7 +47,7 @@
 
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-sm-3 sidenav hidden-xs">
+        <div class="col-sm-2 sidenav hidden-xs">
             <h2>LYUPAudio</h2>
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/controller?command=main"><fmt:message key="label.main"/></a></li>
@@ -60,7 +60,7 @@
         </div>
         <br>
 
-        <div class="col-sm-9">
+        <div class="col-sm-10">
             <div class="well">
                 <form action="/controller" method="post">
                 <input type="text" class="form-control" name="searchingItem"
@@ -78,6 +78,7 @@
                         <th><fmt:message key="label.year"/></th>
                         <th><fmt:message key="label.price"/></th>
                         <th><fmt:message key="label.listenToDemoVersion"/></th>
+                        <th></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -97,9 +98,16 @@
                             <source src=${audioTrack.demoAudioPath} type="audio/mpeg">
                             </audio>
                         </td>
-                        <td><a href="/controller?command=Add to basket&trackId=${audioTrack.id}">
-                            <fmt:message key="label.addToBasket"/>
-                        </a></td>
+                        <td>
+                            <a href="/controller?command=Add to basket&trackId=${audioTrack.id}">
+                                <fmt:message key="label.addToBasket"/>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/controller?command=Show replies client&trackId=${audioTrack.id}">
+                                <fmt:message key="label.showReplies"/>
+                            </a>
+                        </td>
                     </tr>
                     </c:forEach>
                     </tbody>

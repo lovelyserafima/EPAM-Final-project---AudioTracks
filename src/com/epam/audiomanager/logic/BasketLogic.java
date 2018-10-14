@@ -2,7 +2,9 @@ package com.epam.audiomanager.logic;
 
 import com.epam.audiomanager.database.dao.DAOManager;
 import com.epam.audiomanager.database.dao.impl.BasketDAO;
+import com.epam.audiomanager.database.dao.impl.MediaLibraryDAO;
 import com.epam.audiomanager.entity.audio.AudioTrack;
+import com.epam.audiomanager.entity.user.User;
 import com.epam.audiomanager.exception.ProjectException;
 import java.util.List;
 
@@ -35,6 +37,20 @@ public class BasketLogic {
             daoManager.endDAO();
         }
         return audioTracks;
+    }
+
+    public static List<User> findAllUserWantingToBuyTracks(int audioId) throws ProjectException {
+        List<User> users;
+
+        DAOManager daoManager = new DAOManager();
+        BasketDAO basketDAO = new BasketDAO();
+        try{
+            daoManager.startDAO(basketDAO);
+            users = basketDAO.findUsersWantingToBuy(audioId);
+            return users;
+        } finally {
+            daoManager.endDAO();
+        }
     }
 
     public static boolean isOrderInBasket(int clientId, int audioTrackId) throws ProjectException {

@@ -18,6 +18,7 @@ public class ConstantAttributes {
     public static final String AUDIO_TRACKS = "audioTracks";
     public static final String USER = "user";
     public static final String USERS = "users";
+    public static final String REPLIES = "replies";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String NEW_PASSWORD = "newPassword";
@@ -25,6 +26,13 @@ public class ConstantAttributes {
     public static final String LOGIN = "login";
     public static final String FIRST_NAME = "firstName";
     public static final String SECOND_NAME = "secondName";
+    public static final String YEAR = "year";
+    public static final String PRICE = "price";
+    public static final String NAME = "name";
+    public static final String BAND = "band";
+    public static final String ALBUM = "album";
+    public static final String FULL_AUDIO_PATH = "fullAudioPath";
+    public static final String DEMO_AUDIO_PATH = "demoAudioPath";
     public static final String RESULT_CHANGING = "resultChanging";
     public static final String SEARCHING_ITEM = "searchingItem";
     public static final String RESULT_OF_SEARCHING = "resultOfSearching";
@@ -40,4 +48,8 @@ public class ConstantAttributes {
     public static final String MEDIA_LIBRARY_TRACKS = "mediaTracks";
     public static final String AUDIO_TRACK = "audioTrack";
     public static final String NO_USERS = "noUsers";
+    public static final String NO_REPLIES = "noReplies";
+    public static final String WRONG_ALBUM = "wrongAlbum";
+    public static final String WRONG_PRICE = "wrongPrice";
+    public static final String WRONG_YEAR = "wrongYear";
 }
