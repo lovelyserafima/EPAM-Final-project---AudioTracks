@@ -35,8 +35,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="#">Main</a></li>
                 <li><a href="#">Search</a></li>
+                <li><a href="#">MediaLibrary</a></li>
                 <li class="active"><a href="#">Profile</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="#">Basket</a></li>
                 <li><a href="#">Log out</a></li>
             </ul>
         </div>
@@ -50,8 +51,9 @@
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/controller?command=main"><fmt:message key="label.main"/></a></li>
                 <li><a href="/controller?command=search"><fmt:message key="label.search"/></a></li>
+                <li><a href="/controller?command=media library"><fmt:message key="label.mediaLibrary"/></a></li>
                 <li class="active"><a href="/controller?command=profile"><fmt:message key="label.profile"/></a></li>
-                <li><a href="#section3"><fmt:message key="label.settings"/></a></li>
+                <li><a href="/controller?command=basket"><fmt:message key="label.basketTitle"/></a></li>
                 <li><a href="/controller?command=log out"><fmt:message key="label.logOut"/></a></li>
             </ul><br>
         </div>
@@ -70,7 +72,7 @@
                         <tr>
                             <form action="/controller" method="post">
                             <th><fmt:message key="label.addBalance"/></th>
-                            <th><input type="text" name="addedMoney" required></th>
+                            <th><input type="number" name="addedMoney" required></th>
                             <th>
                                 <button type="submit" name="command" value="Confirm topping up">
                                 <fmt:message key="label.topUp"/>

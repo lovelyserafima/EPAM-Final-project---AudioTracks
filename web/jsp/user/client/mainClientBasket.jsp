@@ -69,17 +69,18 @@
                     <tr>
                         <th>#</th>
                         <th><fmt:message key="label.name"/></th>
-                        <th><fmt:message key="label.album"/></th>
                         <th><fmt:message key="label.band"/></th>
+                        <th><fmt:message key="label.album"/></th>
                         <th><fmt:message key="label.year"/></th>
                         <th><fmt:message key="label.price"/></th>
                         <th><fmt:message key="label.listenToDemoVersion"/></th>
+                        <th></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <p class="text-danger">${resultOfWrongBuying}</p>
-                    <p class="text-success">${resultOfSuccessfullBuying}</p>
+                    <p class="text-success">${resultOfSuccessfullAction}</p>
                     <c:forEach items="${requestScope.audioTracks}" var="audioTrack">
                         <tr>
                             <td>${audioTrack.id}</td>
@@ -93,9 +94,16 @@
                                     <source src=${audioTrack.demoAudioPath} type="audio/mpeg">
                                 </audio>
                             </td>
-                            <td><a href="/controller?command=Buy&trackId=${audioTrack.id}">
-                                <fmt:message key="label.buy"/>
-                            </a></td>
+                            <td>
+                                <a href="/controller?command=Buy&trackId=${audioTrack.id}">
+                                    <fmt:message key="label.buy"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/controller?command=Cancel order&trackId=${audioTrack.id}">
+                                    <fmt:message key="label.cancelOrder"/>
+                                </a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

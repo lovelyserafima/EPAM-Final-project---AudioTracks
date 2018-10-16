@@ -36,7 +36,6 @@
             <ul class="nav navbar-nav">
                 <li><a href="#">Main</a></li>
                 <li class="active"><a href="#">Audio</a></li>
-                <li><a href="#">Users</a></li>
                 <li><a href="#">Log out</a></li>
             </ul>
         </div>
@@ -50,7 +49,6 @@
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/controller?command=main"><fmt:message key="label.main"/></a></li>
                 <li class="active"><a href="/controller?command=Search"><fmt:message key="label.audio"/></a></li>
-                <li><a href="/controller?command=media library"><fmt:message key="label.users"/></a></li>
                 <li><a href="/controller?command=log out"><fmt:message key="label.logOut"/></a></li>
             </ul><br>
         </div>
@@ -62,15 +60,13 @@
                     <input type="text" class="form-control" name="searchingItem"
                            placeholder="<fmt:message key="label.searchByNamePerformerAlbum"/>">
                     <br>
+                    <p class="text-success">${goodResultOfAdding}</p>
                     <button type="submit" name="command" value="Search music"><fmt:message key="label.search"/></button>
                     <button type="submit" name="command" value="Add track">
                         <fmt:message key="label.addNewTrack"/>
                     </button>
                     <button type="submit" name="command" value="Add album">
                         <fmt:message key="label.addNewAlbum"/>
-                    </button>
-                    <button type="submit" name="command" value="Add assembly">
-                        <fmt:message key="label.addNewAssembly"/>
                     </button>
                     <h4><fmt:message key="label.allSongs"/></h4>
                     <table class="table">

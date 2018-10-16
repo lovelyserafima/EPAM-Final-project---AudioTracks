@@ -43,6 +43,9 @@ public class RegisterCommand implements Command {
                 if (Validation.arePasswordsEqual(password, samePassword)){
                         if (!EmailLogic.isEmailExists(email)){
                             if (Validation.isCorrectLogin(login)) {
+                                login = Validation.replaceScript(login);
+                                firstName = Validation.replaceScript(firstName);
+                                secondName = Validation.replaceScript(secondName);
                                 if (!LoginLogic.isLoginExists(login)) {
                                     Client client = new Client(email, login, firstName, secondName,
                                             TypeUser.CLIENT, false);

@@ -25,18 +25,22 @@ public class AddToBasketCommand implements Command {
         int clientId = ((User) httpSession.getAttribute(ConstantAttributes.USER)).getId();
         int audioId = Integer.parseInt(httpServletRequest.getParameter(ConstantAttributes.TRACK_ID));
 
-        if (!BasketLogic.isOrderInBasket(clientId, audioId)){
-            if (!MediaLibraryLogic.isTrackInMediaLibrary(clientId, audioId)){
-                BasketLogic.insertOrder(clientId, audioId);
-                httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_ADDING_TO_BASKET, messageManager.getMessage(
-                        ConstantMessages.TRACK_WAS_ADDED_TO_BASKET));
+        if (!MediaLibraryLogic.isTrackInMediaLibrary(clientId, audioId)){
+            if (!BasketLogic.isOrderInBasket(clientId, audioId)){
+                if (!BasketLogic.wasOrderInBasket(clientId, audioId)) {
+                    BasketLogic.insertOrder(clientId, audioId);
+                } else {
+                    BasketLogic.resumeOrder(clientId, audioId);
+                }
+                httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_ADDING_TO_BASKET,
+                        messageManager.getMessage(ConstantMessages.TRACK_WAS_ADDED_TO_BASKET));
             } else {
-                httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_SEARCHING,
-                        messageManager.getMessage(ConstantMessages.ALREADY_EXISTS_IN_MEDIA_LIBRARY));
+                httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_SEARCHING, messageManager.getMessage(
+                        ConstantMessages.ORDER_ALREADY_EXISTS_IN_BASKET));
             }
         } else {
-            httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_SEARCHING, messageManager.getMessage(
-                    ConstantMessages.ORDER_ALREADY_EXISTS_IN_BASKET));
+            httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_SEARCHING,
+                    messageManager.getMessage(ConstantMessages.ALREADY_EXISTS_IN_MEDIA_LIBRARY));
         }
 
         httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS,

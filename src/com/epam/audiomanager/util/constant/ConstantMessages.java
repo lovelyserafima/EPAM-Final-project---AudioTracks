@@ -28,4 +28,9 @@ public class ConstantMessages {
     public static final String WRONG_YEAR = "message.wrongYear";
     public static final String NOBODY_WANTS_TO_BUY_IT_NOW = "message.nobodyWantsToBuyIt";
     public static final String NO_REPLIES = "message.noReplies";
+    public static final String ALBUM_WAS_ADDED = "message.albumWasAdded";
+    public static final String TRACK_WAS_ADDED = "message.trackWasAdded";
+    public static final String ALREADY_EXISTING_ALBUM = "message.alreadyExistingAlbum";
+    public static final String ALREADY_EXISTING_TRACK = "message.alreadyExistingTrack";
+    public static final String ORDER_WAS_SUCCESSFULLY_CANCELED = "message.orderWasSuccessfullyCanceled";
 }

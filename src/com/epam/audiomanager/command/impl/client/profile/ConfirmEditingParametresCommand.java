@@ -12,6 +12,7 @@ import com.epam.audiomanager.util.constant.ConstantMessages;
 import com.epam.audiomanager.util.constant.ConstantPathPages;
 import com.epam.audiomanager.util.property.ConfigurationManager;
 import com.epam.audiomanager.util.property.MessageManager;
+import com.epam.audiomanager.util.valid.Validation;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,7 +48,7 @@ public class ConfirmEditingParametresCommand implements Command {
                                  HttpSession httpSession, String page, MessageManager messageManager)
             throws ProjectException {
         String oldLogin = user.getLogin();
-        String enteredLogin = httpServletRequest.getParameter(ConstantAttributes.LOGIN);
+        String enteredLogin = Validation.replaceScript(httpServletRequest.getParameter(ConstantAttributes.LOGIN));
         if (!oldLogin.equals(enteredLogin)) {
             if (!LoginLogic.isLoginExists(enteredLogin)) {
                 prepareParametres(user, enteredEmail, enteredLogin, httpServletRequest, httpSession, page);
@@ -69,8 +70,8 @@ public class ConfirmEditingParametresCommand implements Command {
                                    HttpServletRequest httpServletRequest, HttpSession httpSession, String page) {
         user.setEmail(enteredEmail);
         user.setLogin(enteredLogin);
-        user.setFirstName(httpServletRequest.getParameter(ConstantAttributes.FIRST_NAME));
-        user.setSecondName(httpServletRequest.getParameter(ConstantAttributes.SECOND_NAME));
+        user.setFirstName(Validation.replaceScript(httpServletRequest.getParameter(ConstantAttributes.FIRST_NAME)));
+        user.setSecondName(Validation.replaceScript(httpServletRequest.getParameter(ConstantAttributes.SECOND_NAME)));
         httpSession.setAttribute(ConstantAttributes.USER, user);
         httpSession.setAttribute(ConstantAttributes.LOGIN, user.getLogin());
     }

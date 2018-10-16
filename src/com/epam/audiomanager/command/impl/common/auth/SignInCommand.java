@@ -11,6 +11,7 @@ import com.epam.audiomanager.util.constant.ConstantMessages;
 import com.epam.audiomanager.util.constant.ConstantPathPages;
 import com.epam.audiomanager.util.property.ConfigurationManager;
 import com.epam.audiomanager.util.property.MessageManager;
+import com.epam.audiomanager.util.valid.Validation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -26,17 +27,23 @@ public class SignInCommand implements Command {
         String password = httpServletRequest.getParameter(ConstantAttributes.PASSWORD);
 
         String page;
-        User user = SignInLogic.checkLogin(email, password);
-        if (user != null) {
-            if (user.getClass() == Client.class){
-                page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT);
+        if (Validation.isCorrectEmail(email) && Validation.isCorrectPassword(password)) {
+            User user = SignInLogic.isUserExists(email, password);
+            if (user != null) {
+                if (user.getClass() == Client.class) {
+                    page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT);
+                } else {
+                    page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_ADMIN);
+                }
+                httpSession.setAttribute(ConstantAttributes.ROLE, user.getType());
+                httpSession.setAttribute(ConstantAttributes.LOGIN, user.getLogin());
+                httpSession.setAttribute(ConstantAttributes.USER, user);
+                httpSession.setAttribute(ConstantAttributes.PASSWORD, password);
             } else {
-                page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_ADMIN);
+                page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_LOGIN);
+                httpServletRequest.setAttribute(ConstantAttributes.ERROR_SIGN_IN_MESSAGE,
+                        messageManager.getMessage(ConstantMessages.PATH_ERROR_SIGN_IN_MESSAGE));
             }
-            httpSession.setAttribute(ConstantAttributes.ROLE, user.getType());
-            httpSession.setAttribute(ConstantAttributes.LOGIN, user.getLogin());
-            httpSession.setAttribute(ConstantAttributes.USER, user);
-            httpSession.setAttribute(ConstantAttributes.PASSWORD, password);
         } else {
             page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_LOGIN);
             httpServletRequest.setAttribute(ConstantAttributes.ERROR_SIGN_IN_MESSAGE,

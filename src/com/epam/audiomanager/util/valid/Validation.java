@@ -6,6 +6,7 @@ public class Validation {
     private static final String CHECK_EMAIL = "[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@" +
             "([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\\.)*([a-z]{2,4})";
     private static final String CHECK_PASSWORD = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
+    private static final String REPLACE_SCRIPT = "</?script>";
     private static final int MAX_LOGIN_LENGTH = 20;
 
     public static boolean isCorrectEmail(String email){
@@ -25,5 +26,8 @@ public class Validation {
     }
     public static boolean isCorrectPrice(BigDecimal price){
         return price.doubleValue() > 0;
+    }
+    public static String replaceScript(String value){
+        return value.replaceAll(REPLACE_SCRIPT, "");
     }
 }

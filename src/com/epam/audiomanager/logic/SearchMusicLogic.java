@@ -1,7 +1,7 @@
 package com.epam.audiomanager.logic;
 
 import com.epam.audiomanager.database.dao.DAOManager;
-import com.epam.audiomanager.database.dao.impl.audio.AudioTrackDAO;
+import com.epam.audiomanager.database.dao.impl.AudioTrackDAOImpl;
 import com.epam.audiomanager.entity.audio.AudioTrack;
 import com.epam.audiomanager.exception.ProjectException;
 
@@ -12,10 +12,10 @@ public class SearchMusicLogic {
         List<AudioTrack> audioTracks;
 
         DAOManager daoManager = new DAOManager();
-        AudioTrackDAO audioTrackDAO = new AudioTrackDAO();
+        AudioTrackDAOImpl audioTrackDAOImpl = new AudioTrackDAOImpl();
         try {
-            daoManager.startDAO(audioTrackDAO);
-            audioTracks = audioTrackDAO.findAll();
+            daoManager.startDAO(audioTrackDAOImpl);
+            audioTracks = audioTrackDAOImpl.findAll();
         } finally {
             daoManager.endDAO();
         }
@@ -26,10 +26,10 @@ public class SearchMusicLogic {
         List<AudioTrack> audioTracks;
 
         DAOManager daoManager = new DAOManager();
-        AudioTrackDAO audioTrackDAO = new AudioTrackDAO();
+        AudioTrackDAOImpl audioTrackDAOImpl = new AudioTrackDAOImpl();
         try{
-            daoManager.startDAO(audioTrackDAO);
-            audioTracks = audioTrackDAO.findAudioTracksBySmth(entity);
+            daoManager.startDAO(audioTrackDAOImpl);
+            audioTracks = audioTrackDAOImpl.findAudioTracksBySmth(entity);
         } finally {
             daoManager.endDAO();
         }

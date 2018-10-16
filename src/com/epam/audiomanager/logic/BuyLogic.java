@@ -1,9 +1,9 @@
 package com.epam.audiomanager.logic;
 
 import com.epam.audiomanager.database.dao.DAOManager;
-import com.epam.audiomanager.database.dao.impl.BasketDAO;
-import com.epam.audiomanager.database.dao.impl.audio.AudioTrackDAO;
-import com.epam.audiomanager.database.dao.impl.user.UserDAOImpl;
+import com.epam.audiomanager.database.dao.impl.BasketDAOImpl;
+import com.epam.audiomanager.database.dao.impl.AudioTrackDAOImpl;
+import com.epam.audiomanager.database.dao.impl.UserDAOImpl;
 import com.epam.audiomanager.exception.ProjectException;
 
 import java.math.BigDecimal;
@@ -23,14 +23,14 @@ public class BuyLogic {
     public static void buyAudioTrack(int clientId, int audioId, BigDecimal clientMoney, BigDecimal priceAudio)
             throws ProjectException {
         DAOManager daoManager =  new DAOManager();
-        AudioTrackDAO audioTrackDAO = new AudioTrackDAO();
-        BasketDAO basketDAO = new BasketDAO();
+        AudioTrackDAOImpl audioTrackDAOImpl = new AudioTrackDAOImpl();
+        BasketDAOImpl basketDAOImpl = new BasketDAOImpl();
         UserDAOImpl userDAO = new UserDAOImpl();
         try {
-            daoManager.startDAO(audioTrackDAO, basketDAO, userDAO);
-            audioTrackDAO.buyAudioTrack(clientId, audioId);
+            daoManager.startDAO(audioTrackDAOImpl, basketDAOImpl, userDAO);
+            audioTrackDAOImpl.buyAudioTrack(clientId, audioId);
             userDAO.updateUserMoney(clientId, clientMoney, priceAudio);
-            basketDAO.deleteByID(clientId, audioId);
+            basketDAOImpl.deleteByClientIdAndAudioId(clientId, audioId);
             daoManager.commit();
         } catch (ProjectException e) {
             daoManager.rollback();

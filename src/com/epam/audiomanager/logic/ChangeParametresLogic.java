@@ -1,7 +1,7 @@
 package com.epam.audiomanager.logic;
 
 import com.epam.audiomanager.database.dao.DAOManager;
-import com.epam.audiomanager.database.dao.impl.user.UserDAOImpl;
+import com.epam.audiomanager.database.dao.impl.UserDAOImpl;
 import com.epam.audiomanager.entity.user.Client;
 import com.epam.audiomanager.exception.ProjectException;
 

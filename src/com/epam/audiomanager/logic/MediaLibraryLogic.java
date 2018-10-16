@@ -1,9 +1,8 @@
 package com.epam.audiomanager.logic;
 
 import com.epam.audiomanager.database.dao.DAOManager;
-import com.epam.audiomanager.database.dao.impl.MediaLibraryDAO;
+import com.epam.audiomanager.database.dao.impl.MediaLibraryDAOImpl;
 import com.epam.audiomanager.entity.audio.AudioTrack;
-import com.epam.audiomanager.entity.user.Client;
 import com.epam.audiomanager.entity.user.User;
 import com.epam.audiomanager.exception.ProjectException;
 
@@ -14,10 +13,10 @@ public class MediaLibraryLogic {
         List<AudioTrack> audioTracks;
 
         DAOManager daoManager = new DAOManager();
-        MediaLibraryDAO mediaLibraryDAO = new MediaLibraryDAO();
+        MediaLibraryDAOImpl mediaLibraryDAOImplImpl = new MediaLibraryDAOImpl();
         try{
-            daoManager.startDAO(mediaLibraryDAO);
-            audioTracks = mediaLibraryDAO.findAll(id);
+            daoManager.startDAO(mediaLibraryDAOImplImpl);
+            audioTracks = mediaLibraryDAOImplImpl.findAll(id);
         } finally {
             daoManager.endDAO();
         }
@@ -28,10 +27,10 @@ public class MediaLibraryLogic {
         List<User> users;
 
         DAOManager daoManager = new DAOManager();
-        MediaLibraryDAO mediaLibraryDAO = new MediaLibraryDAO();
+        MediaLibraryDAOImpl mediaLibraryDAOImplImpl = new MediaLibraryDAOImpl();
         try{
-            daoManager.startDAO(mediaLibraryDAO);
-            users = mediaLibraryDAO.findUsersHavingTrack(audioId);
+            daoManager.startDAO(mediaLibraryDAOImplImpl);
+            users = mediaLibraryDAOImplImpl.findUsersHavingTrack(audioId);
             return users;
         } finally {
             daoManager.endDAO();
@@ -40,10 +39,10 @@ public class MediaLibraryLogic {
 
     public static boolean isTrackInMediaLibrary(int clientID, int audioID) throws ProjectException {
         DAOManager daoManager = new DAOManager();
-        MediaLibraryDAO mediaLibraryDAO = new MediaLibraryDAO();
+        MediaLibraryDAOImpl mediaLibraryDAOImplImpl = new MediaLibraryDAOImpl();
         try{
-            daoManager.startDAO(mediaLibraryDAO);
-            return mediaLibraryDAO.findByID(clientID, audioID);
+            daoManager.startDAO(mediaLibraryDAOImplImpl);
+            return mediaLibraryDAOImplImpl.findByIds(clientID, audioID);
         } finally {
             daoManager.endDAO();
         }

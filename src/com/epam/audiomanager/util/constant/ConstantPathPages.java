@@ -27,6 +27,7 @@ public class ConstantPathPages {
     public static final String PATH_PAGE_MAIN_ADMIN_EDIT_AUDIO = "path.page.mainPageAdminEditAudio";
     public static final String PATH_PAGE_MAIN_ADMIN_WHO_LISTENS = "path.page.mainPageAdminWhoListens";
     public static final String PATH_PAGE_MAIN_ADMIN_WHO_WANTS_TO_BUY = "path.page.mainPageAdminWhoWantsToBuy";
-
     public static final String PATH_PAGE_SHOW_REPLIES_ADMIN = "path.page.showRepliesAdmin";
+    public static final String PATH_PAGE_ADD_NEW_TRACK = "path.page.addNewTrack";
+    public static final String PATH_PAGE_ADD_NEW_ALBUM = "path.page.addNewAlbum";
 }

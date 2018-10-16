@@ -35,7 +35,6 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Main</a></li>
                 <li><a href="#">Audio</a></li>
-                <li><a href="#">Users</a></li>
                 <li><a href="#">Log out</a></li>
             </ul>
         </div>
@@ -49,7 +48,6 @@
             <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="/controller?command=main"><fmt:message key="label.main"/></a></li>
                 <li><a href="/controller?command=Search"><fmt:message key="label.audio"/></a></li>
-                <li><a href="/controller?command=media library"><fmt:message key="label.users"/></a></li>
                 <li><a href="/controller?command=log out"><fmt:message key="label.logOut"/></a></li>
             </ul><br>
         </div>

@@ -1,7 +1,7 @@
 package com.epam.audiomanager.logic.registration;
 
 import com.epam.audiomanager.database.dao.DAOManager;
-import com.epam.audiomanager.database.dao.impl.user.UserDAOImpl;
+import com.epam.audiomanager.database.dao.impl.UserDAOImpl;
 import com.epam.audiomanager.entity.user.User;
 import com.epam.audiomanager.exception.ProjectException;
 import org.apache.logging.log4j.LogManager;

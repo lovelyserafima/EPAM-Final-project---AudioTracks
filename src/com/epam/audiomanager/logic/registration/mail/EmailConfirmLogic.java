@@ -1,6 +1,6 @@
 package com.epam.audiomanager.logic.registration.mail;
 
-import com.epam.audiomanager.util.SessionCreator;
+import com.epam.audiomanager.util.mail.SessionCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.mail.Message;

@@ -39,7 +39,7 @@ public class BuyCommand implements Command {
             List<AudioTrack> leftAudioTracks = BasketLogic.findAllOrders(clientId);
             httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS, leftAudioTracks);
             httpSession.setAttribute(ConstantAttributes.AUDIO_TRACKS, leftAudioTracks);
-            httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_SUCCESSFULL_BUYING,
+            httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_SUCCESSFULL_ACTION,
                     messageManager.getMessage(ConstantMessages.TRACK_WAS_BOUGHT_SUCCESSFULLY));
             httpSession.setAttribute(ConstantAttributes.USER, client);
         } else {

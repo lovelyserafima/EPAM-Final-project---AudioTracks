@@ -11,6 +11,7 @@ import com.epam.audiomanager.util.constant.ConstantMessages;
 import com.epam.audiomanager.util.constant.ConstantPathPages;
 import com.epam.audiomanager.util.property.ConfigurationManager;
 import com.epam.audiomanager.util.property.MessageManager;
+import com.epam.audiomanager.util.valid.Validation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -19,10 +20,16 @@ public class SearchMusicCommand implements Command {
     @Override
     public Router execute(HttpServletRequest httpServletRequest) throws ProjectException {
         String searchingItem = httpServletRequest.getParameter(ConstantAttributes.SEARCHING_ITEM);
-        List<AudioTrack> audioTracks = SearchMusicLogic.findTracksByEntity(searchingItem);
+        List<AudioTrack> audioTracks;
+        if (!searchingItem.isEmpty()) {
+            audioTracks = SearchMusicLogic.findTracksByEntity(Validation.replaceScript(searchingItem));
+        } else {
+            audioTracks = SearchMusicLogic.findAllTracks();
+        }
+
         HttpSession httpSession = httpServletRequest.getSession();
         httpSession.setAttribute(ConstantAttributes.RESULT_OF_SEARCHING, null);
-        if (!audioTracks.isEmpty()){
+        if (!audioTracks.isEmpty()) {
             httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS, audioTracks);
             httpSession.setAttribute(ConstantAttributes.AUDIO_TRACKS, audioTracks);
         } else {
@@ -32,6 +39,7 @@ public class SearchMusicCommand implements Command {
             httpSession.setAttribute(ConstantAttributes.RESULT_OF_SEARCHING, messageManager.getMessage(
                     ConstantMessages.NO_RESULTS));
         }
+
         Router router = new Router();
         if (httpSession.getAttribute(ConstantAttributes.ROLE) == TypeUser.CLIENT){
             router.setPagePath(ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_SEARCH));

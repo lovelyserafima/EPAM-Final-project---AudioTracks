@@ -1,8 +1,12 @@
 package com.epam.audiomanager.command.impl.common;
 
 import com.epam.audiomanager.command.Command;
-import com.epam.audiomanager.command.impl.admin.audio.*;
-import com.epam.audiomanager.command.impl.admin.audio.ShowRepliesAdminCommand;
+import com.epam.audiomanager.command.impl.admin.*;
+import com.epam.audiomanager.command.impl.admin.add.AddAlbumCommand;
+import com.epam.audiomanager.command.impl.admin.add.AddTrackCommand;
+import com.epam.audiomanager.command.impl.admin.add.ConfirmAddingNewAlbum;
+import com.epam.audiomanager.command.impl.admin.add.ConfirmAddingNewTrack;
+import com.epam.audiomanager.command.impl.client.basket.CancelOrderCommand;
 import com.epam.audiomanager.command.impl.client.search.BackSearchCommand;
 import com.epam.audiomanager.command.impl.client.search.ShowRepliesClientCommand;
 import com.epam.audiomanager.command.impl.common.auth.LogOutCommand;
@@ -37,7 +41,9 @@ public enum CommandEnum {
     CONFIRM_EDITING_AUDIO(new ConfirmEditingAudioCommand()), WHO_LISTENS(new WhoListensCommand()),
     BACK_READ_MORE(new BackReadMoreCommand()), WHO_WANTS_TO_BUY(new WhoWantsToBuyCommand()),
     SHOW_REPLIES_ADMIN(new ShowRepliesAdminCommand()), SHOW_REPLIES_CLIENT(new ShowRepliesClientCommand()),
-    BACK_SEARCH(new BackSearchCommand());
+    BACK_SEARCH(new BackSearchCommand()), DELETE_AUDIO(new DeleteAudioCommand()), ADD_TRACK(new AddTrackCommand()),
+    ADD_ALBUM(new AddAlbumCommand()), CONFIRM_ADDING_ALBUM(new ConfirmAddingNewAlbum()),
+    CONFIRM_ADDING_AUDIO(new ConfirmAddingNewTrack()), CANCEL_ORDER(new CancelOrderCommand());
 
     private Command command;
 
