@@ -43,6 +43,8 @@ public class ConstantAttributes {
     public static final String RESULT_OF_WRONG_BUYING = "resultOfWrongBuying";
     public static final String ADDED_MONEY = "addedMoney";
     public static final String REPLY = "reply";
+    public static final String WRONG_USER_NAME = "wrongUserName";
+    public static final String WRONG_TOP_UP = "wrongTopUp";
 
     public static final String BAD_RESULT_OF_REPLY = "badResultOfReply";
     public static final String GOOD_RESULT_OF_REPLY = "goodResultOfReply";

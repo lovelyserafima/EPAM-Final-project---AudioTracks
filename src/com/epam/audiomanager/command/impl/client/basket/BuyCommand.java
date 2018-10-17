@@ -24,7 +24,6 @@ public class BuyCommand implements Command {
         HttpSession httpSession = httpServletRequest.getSession();
         MessageManager messageManager = MessageManager.defineLocale((String) httpSession.getAttribute(
                 ConstantAttributes.CHANGE_LANGUAGE));
-        String page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_BASKET);
 
         Client client = (Client) httpSession.getAttribute(ConstantAttributes.USER);
         int clientId = client.getId();
@@ -49,7 +48,7 @@ public class BuyCommand implements Command {
                     ConstantAttributes.AUDIO_TRACKS));
         }
         //router.setRouteTypeRedirect();
-        router.setPagePath(page);
+        router.setPagePath(ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_BASKET));
         return router;
 
     }

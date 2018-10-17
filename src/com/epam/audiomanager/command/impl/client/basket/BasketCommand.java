@@ -19,12 +19,14 @@ public class BasketCommand implements Command {
     @Override
     public Router execute(HttpServletRequest httpServletRequest) throws ProjectException {
         Router router = new Router();
-        String page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_BASKET);
+
         int id = ((User) httpServletRequest.getSession().getAttribute(ConstantAttributes.USER)).getId();
         List<AudioTrack> audioTracks = BasketLogic.findAllOrders(id);
+
         HttpSession httpSession = httpServletRequest.getSession();
         MessageManager messageManager = MessageManager.defineLocale((String) httpSession.getAttribute(
                 ConstantAttributes.CHANGE_LANGUAGE));
+
         if (!audioTracks.isEmpty()){
             httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS, audioTracks);
             httpSession.setAttribute(ConstantAttributes.AUDIO_TRACKS, audioTracks);
@@ -32,7 +34,7 @@ public class BasketCommand implements Command {
             httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_WRONG_BUYING,
                     messageManager.getMessage(ConstantMessages.EMPTY_BASKET));
         }
-        router.setPagePath(page);
+        router.setPagePath(ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_BASKET));
         return router;
     }
 }

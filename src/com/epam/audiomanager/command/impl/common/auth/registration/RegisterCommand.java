@@ -30,10 +30,11 @@ public class RegisterCommand implements Command {
         String secondName = httpServletRequest.getParameter(ConstantAttributes.SECOND_NAME);
 
         HttpSession httpSession = httpServletRequest.getSession();
-        httpSession.setAttribute(ConstantAttributes.ERROR_NOT_SAME_PASSWORDS, null);
-        httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, null);
-        httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_PASSWORD, null);
-        httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN, null);
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_NOT_SAME_PASSWORDS, null);
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, null);
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_PASSWORD, null);
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN, null);
+        httpServletRequest.setAttribute(ConstantAttributes.WRONG_USER_NAME, null);
         MessageManager messageManager = MessageManager.defineLocale((String) httpSession.getAttribute(
                 ConstantAttributes.CHANGE_LANGUAGE));
 
@@ -46,45 +47,50 @@ public class RegisterCommand implements Command {
                                 login = Validation.replaceScript(login);
                                 firstName = Validation.replaceScript(firstName);
                                 secondName = Validation.replaceScript(secondName);
-                                if (!LoginLogic.isLoginExists(login)) {
-                                    Client client = new Client(email, login, firstName, secondName,
-                                            TypeUser.CLIENT, false);
+                                if (Validation.isCorrectUserName(firstName) && Validation.isCorrectUserName(secondName)){
+                                    if (!LoginLogic.isLoginExists(login)) {
+                                        Client client = new Client(email, login, firstName, secondName,
+                                                TypeUser.CLIENT);
 
-                                    httpSession.setAttribute(ConstantAttributes.CLIENT, client);
-                                    httpSession.setAttribute(ConstantAttributes.ENCRYPTED_PASSWORD,
-                                            Encryption.encryptPassword(password));
+                                        httpSession.setAttribute(ConstantAttributes.CLIENT, client);
+                                        httpSession.setAttribute(ConstantAttributes.ENCRYPTED_PASSWORD,
+                                                Encryption.encryptPassword(password));
 
-                                    page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_CONFIRM);
+                                        page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_CONFIRM);
 
-                                    String confirmCode = ConfirmCodeGenerator.generateConfirmCode();
-                                    httpSession.setAttribute(ConstantAttributes.CONFIRM_CODE, confirmCode);
+                                        String confirmCode = ConfirmCodeGenerator.generateConfirmCode();
+                                        httpSession.setAttribute(ConstantAttributes.CONFIRM_CODE, confirmCode);
 
-                                    ResourceBundle resourceBundle = ResourceBundle.getBundle(ConstantBundles.MAIL);
-                                    new EmailConfirmLogic(email, ConstantValues.SUBJECT, confirmCode,
-                                            resourceBundle).start();
+                                        ResourceBundle resourceBundle = ResourceBundle.getBundle(ConstantBundles.MAIL);
+                                        new EmailConfirmLogic(email, ConstantValues.SUBJECT, confirmCode,
+                                                resourceBundle).start();
+                                    } else {
+                                        httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN,
+                                                messageManager.getMessage(ConstantMessages.PATH_ERROR_EXISTING_LOGIN));
+                                    }
                                 } else {
-                                    httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN,
-                                            messageManager.getMessage(ConstantMessages.PATH_ERROR_EXISTING_LOGIN));
+                                    httpServletRequest.setAttribute(ConstantAttributes.WRONG_USER_NAME,
+                                            messageManager.getMessage(ConstantMessages.WRONG_USER_LENGTH));
                                 }
                             } else {
-                                httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN, messageManager.getMessage(
-                                        ConstantMessages.PATH_ERROR_WRONG_LOGIN));
+                                httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN, messageManager
+                                        .getMessage(ConstantMessages.PATH_ERROR_WRONG_LOGIN));
                             }
                         } else {
-                            httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, messageManager.getMessage(
-                                    ConstantMessages.PATH_ERROR_EXISTING_EMAIL));
+                            httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, messageManager
+                                    .getMessage(ConstantMessages.PATH_ERROR_EXISTING_EMAIL));
                         }
                 } else {
-                    httpSession.setAttribute(ConstantAttributes.ERROR_NOT_SAME_PASSWORDS, messageManager.getMessage(
-                            ConstantMessages.PATH_ERROR_NOT_THE_SAME_PASSWORDS));
+                    httpServletRequest.setAttribute(ConstantAttributes.ERROR_NOT_SAME_PASSWORDS, messageManager
+                            .getMessage(ConstantMessages.PATH_ERROR_NOT_THE_SAME_PASSWORDS));
                 }
             } else {
-                httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_PASSWORD, messageManager.getMessage(
-                        ConstantMessages.PATH_ERROR_WRONG_TYPE_OF_PASSWORD));
+                httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_PASSWORD, messageManager
+                        .getMessage(ConstantMessages.PATH_ERROR_WRONG_TYPE_OF_PASSWORD));
             }
         } else {
-            httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, messageManager.getMessage(
-                    ConstantMessages.PATH_ERROR_WRONG_EMAIL));
+            httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, messageManager
+                    .getMessage(ConstantMessages.PATH_ERROR_WRONG_EMAIL));
         }
         router.setPagePath(page);
         return router;

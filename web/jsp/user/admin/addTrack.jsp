@@ -46,6 +46,7 @@
     <div class="row content">
         <div class="col-sm-3 sidenav hidden-xs">
             <h2>LYUPAudio</h2>
+            <h4><fmt:message key="label.admin"/></h4>
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/controller?command=main"><fmt:message key="label.main"/></a></li>
                 <li class="active"><a href="/controller?command=Search"><fmt:message key="label.audio"/></a></li>

@@ -46,6 +46,7 @@
     <div class="row content">
         <div class="col-sm-3 sidenav hidden-xs">
             <h2>LYUPAudio</h2>
+            <h4><fmt:message key="label.admin"/></h4>
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/controller?command=main"><fmt:message key="label.main"/></a></li>
                 <li class="active"><a href="/controller?command=Search"><fmt:message key="label.audio"/></a></li>
@@ -73,15 +74,15 @@
                         </tr>
                         <tr>
                             <th><fmt:message key="label.name"/></th>
-                            <th><input type="text" name="name" value="${audioTrack.name}" required/></th>
+                            <th><input type="text" name="name" value="${audioTrack.name}" required maxlength="100"/></th>
                         </tr>
                         <tr>
                             <th><fmt:message key="label.band"/></th>
-                            <th><input type="text" name="band" value="${audioTrack.band}" required/></th>
+                            <th><input type="text" name="band" value="${audioTrack.band}" required maxlength="100"/></th>
                         </tr>
                         <tr>
                             <th><fmt:message key="label.album"/></th>
-                            <th><input type="text" name="album" value="${audioTrack.album}" required/></th>
+                            <th><input type="text" name="album" value="${audioTrack.album}" required maxlength="100"/></th>
                             <th><p class="text-danger">${wrongAlbum}</p></th>
                         </tr>
                         <tr>

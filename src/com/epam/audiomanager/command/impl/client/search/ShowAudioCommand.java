@@ -4,6 +4,7 @@ import com.epam.audiomanager.command.Command;
 import com.epam.audiomanager.controller.Router;
 import com.epam.audiomanager.entity.audio.AudioTrack;
 import com.epam.audiomanager.entity.user.TypeUser;
+import com.epam.audiomanager.entity.user.User;
 import com.epam.audiomanager.exception.ProjectException;
 import com.epam.audiomanager.logic.SearchMusicLogic;
 import com.epam.audiomanager.util.constant.ConstantAttributes;
@@ -21,7 +22,7 @@ public class ShowAudioCommand implements Command {
         String page;
         HttpSession httpSession = httpServletRequest.getSession();
         if (!audioTracks.isEmpty()){
-            if (httpSession.getAttribute(ConstantAttributes.ROLE) == TypeUser.CLIENT){
+            if (((User) httpSession.getAttribute(ConstantAttributes.USER)).getType() == TypeUser.CLIENT){
                 page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_SEARCH);
             } else {
                 page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_ADMIN_SEARCH);

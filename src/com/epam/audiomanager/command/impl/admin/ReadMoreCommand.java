@@ -17,11 +17,9 @@ public class ReadMoreCommand implements Command {
 
         int audioId = Integer.parseInt(httpServletRequest.getParameter(ConstantAttributes.TRACK_ID));
         AudioTrack audioTrack = AudioLogic.findAudioTrack(audioId);
-        httpServletRequest.setAttribute(ConstantAttributes.USERS, null);
-        if (audioTrack != null){
-            httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACK, audioTrack);
-            httpServletRequest.getSession().setAttribute(ConstantAttributes.AUDIO_TRACK, audioTrack);
-        }
+
+        httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACK, audioTrack);
+        httpServletRequest.getSession().setAttribute(ConstantAttributes.AUDIO_TRACK, audioTrack);
         router.setPagePath(ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_ADMIN_READ_MORE_AUDIO));
         return router;
     }

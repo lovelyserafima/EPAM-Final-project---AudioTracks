@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool{
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private BlockingQueue<ProxyConnection> connectionQueue;
-    private final int DEFAULT_POOL_SIZE = 50;
+    private final int DEFAULT_POOL_SIZE = 100;
     private static AtomicBoolean instanceCreated  = new AtomicBoolean();
     private static ConnectionPool instance;
     private static ReentrantLock lock = new ReentrantLock();

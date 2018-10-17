@@ -1,13 +1,13 @@
 package com.epam.audiomanager.logic.registration;
 
-import com.epam.audiomanager.database.dao.DAOManager;
-import com.epam.audiomanager.database.dao.impl.UserDAOImpl;
+import com.epam.audiomanager.database.dao.DaoManager;
+import com.epam.audiomanager.database.dao.impl.UserDaoImpl;
 import com.epam.audiomanager.exception.ProjectException;
 
 public class LoginLogic {
     public static boolean isLoginExists(String login) throws ProjectException {
-        DAOManager daoManager = new DAOManager();
-        UserDAOImpl userDAO = new UserDAOImpl();
+        DaoManager daoManager = new DaoManager();
+        UserDaoImpl userDAO = new UserDaoImpl();
         try {
             daoManager.startDAO(userDAO);
             return userDAO.findUserByLogin(login);

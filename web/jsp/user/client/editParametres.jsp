@@ -47,6 +47,7 @@
     <div class="row content">
         <div class="col-sm-3 sidenav hidden-xs">
             <h2>LYUPAudio</h2>
+            <h4><fmt:message key="label.client"/></h4>
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/controller?command=main"><fmt:message key="label.main"/></a></li>
                 <li><a href="/controller?command=search"><fmt:message key="label.search"/></a></li>
@@ -75,16 +76,16 @@
                         </tr>
                         <tr>
                             <th><fmt:message key="label.login"/></th>
-                            <th><input type="text" name="login" value="${user.login}" required></th>
+                            <th><input type="text" name="login" value="${user.login}" required maxlength="20"></th>
                             <th><p class="text-danger">${wrongLogin}</p></th>
                         </tr>
                         <tr>
                             <th><fmt:message key="label.firstName"/></th>
-                            <th><input type="text" name="firstName" value="${user.firstName}" required></th>
+                            <th><input type="text" name="firstName" value="${user.firstName}" required maxlength="255"></th>
                         </tr>
                         <tr>
                             <th><fmt:message key="label.secondName"/></th>
-                            <th><input type="text" name="secondName" value="${user.secondName}" required></th>
+                            <th><input type="text" name="secondName" value="${user.secondName}" required maxlength="255" ></th>
                         </tr>
                         </tbody>
                     </table>

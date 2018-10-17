@@ -25,6 +25,9 @@ public class AddToBasketCommand implements Command {
         int clientId = ((User) httpSession.getAttribute(ConstantAttributes.USER)).getId();
         int audioId = Integer.parseInt(httpServletRequest.getParameter(ConstantAttributes.TRACK_ID));
 
+        httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_ADDING_TO_BASKET, null);
+        httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_SEARCHING, null);
+
         if (!MediaLibraryLogic.isTrackInMediaLibrary(clientId, audioId)){
             if (!BasketLogic.isOrderInBasket(clientId, audioId)){
                 if (!BasketLogic.wasOrderInBasket(clientId, audioId)) {

@@ -6,8 +6,11 @@ import com.epam.audiomanager.entity.user.Client;
 import com.epam.audiomanager.exception.ProjectException;
 import com.epam.audiomanager.logic.ChangeParametresLogic;
 import com.epam.audiomanager.util.constant.ConstantAttributes;
+import com.epam.audiomanager.util.constant.ConstantMessages;
 import com.epam.audiomanager.util.constant.ConstantPathPages;
 import com.epam.audiomanager.util.property.ConfigurationManager;
+import com.epam.audiomanager.util.property.MessageManager;
+import com.epam.audiomanager.util.valid.Validation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
@@ -20,10 +23,15 @@ public class ConfirmToppingUpCommand implements Command {
         BigDecimal addedMoney = BigDecimal.valueOf(Long.parseLong(httpServletRequest.getParameter(
                 ConstantAttributes.ADDED_MONEY)));
 
-        Client client = (Client) httpSession.getAttribute(ConstantAttributes.USER);
-        BigDecimal clientMoney = client.getMoney();
-        ChangeParametresLogic.topUpAccount(client.getId(), clientMoney, BigDecimal.valueOf(addedMoney.doubleValue()*-1));
-        client.setMoney(BigDecimal.valueOf(clientMoney.doubleValue() + addedMoney.doubleValue()));
+        if (Validation.isCorrectTopUp(addedMoney)) {
+            if (Validation.isTopUpLessThanMax(addedMoney)) {
+                Client client = (Client) httpSession.getAttribute(ConstantAttributes.USER);
+                BigDecimal clientMoney = client.getMoney();
+                ChangeParametresLogic.topUpAccount(client.getId(), clientMoney,
+                        BigDecimal.valueOf(addedMoney.doubleValue() * -1));
+                client.setMoney(BigDecimal.valueOf(clientMoney.doubleValue() + addedMoney.doubleValue()));
+            }
+        }
 
         router.setRouteTypeRedirect();
         router.setPagePath(ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_PROFILE));

@@ -30,6 +30,11 @@ public class ConfirmAddingNewTrack implements Command {
         String album = httpServletRequest.getParameter(ConstantAttributes.ALBUM);
         int year = Integer.parseInt(httpServletRequest.getParameter(ConstantAttributes.YEAR));
         String page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_ADD_NEW_TRACK);
+
+        httpServletRequest.setAttribute(ConstantAttributes.ALREADY_EXISTS_TRACK, null);
+        httpServletRequest.setAttribute(ConstantAttributes.WRONG_PRICE, null);
+        httpServletRequest.setAttribute(ConstantAttributes.WRONG_YEAR, null);
+
         if (Validation.isCorrectYear(year)){
             BigDecimal price = BigDecimal.valueOf(Double.parseDouble(httpServletRequest.getParameter(
                     ConstantAttributes.PRICE)));
@@ -39,17 +44,29 @@ public class ConfirmAddingNewTrack implements Command {
                 String demoAudioPath = Validation.replaceScript(httpServletRequest
                         .getParameter(ConstantAttributes.DEMO_AUDIO_PATH));
                 if (!AudioLogic.isAudioTrackExists(name, band)){
-                    Integer albumId = null;
-                    if (album != null){
+                    Integer albumId;
+                    if (!album.isEmpty()){
                         album = Validation.replaceScript(album);
                         albumId = AudioLogic.isAlbumExists(album, band);
+                        if (albumId != null) {
+                            AudioLogic.insertAudioTrack(albumId, name, band, year, price, fullAudioPath, demoAudioPath);
+                            httpServletRequest.setAttribute(ConstantAttributes.GOOD_RESULT_OF_ADDING,
+                                    messageManager.getMessage(ConstantMessages.TRACK_WAS_ADDED));
+                            List<AudioTrack> audioTracks = SearchMusicLogic.findAllTracks();
+                            httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS, audioTracks);
+                            page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_ADMIN_SEARCH);
+                        } else {
+                            httpServletRequest.setAttribute(ConstantAttributes.WRONG_ALBUM,
+                                    messageManager.getMessage(ConstantMessages.WRONG_ALBUM));
+                        }
+                    } else {
+                        AudioLogic.insertAudioTrackWithoutAlbum(name, band, year, price, fullAudioPath, demoAudioPath);
+                        httpServletRequest.setAttribute(ConstantAttributes.GOOD_RESULT_OF_ADDING,
+                                messageManager.getMessage(ConstantMessages.TRACK_WAS_ADDED));
+                        List<AudioTrack> audioTracks = SearchMusicLogic.findAllTracks();
+                        httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS, audioTracks);
+                        page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_ADMIN_SEARCH);
                     }
-                    AudioLogic.insertAudioTrack(albumId, name, band, year, price, fullAudioPath, demoAudioPath);
-                    httpServletRequest.setAttribute(ConstantAttributes.GOOD_RESULT_OF_ADDING,
-                            messageManager.getMessage(ConstantMessages.TRACK_WAS_ADDED));
-                    List<AudioTrack> audioTracks = SearchMusicLogic.findAllTracks();
-                    httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS, audioTracks);
-                    page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_ADMIN_SEARCH);
                 } else {
                     httpServletRequest.setAttribute(ConstantAttributes.ALREADY_EXISTS_TRACK,
                             messageManager.getMessage(ConstantMessages.ALREADY_EXISTING_TRACK));

@@ -1,7 +1,7 @@
 package com.epam.audiomanager.logic.registration;
 
-import com.epam.audiomanager.database.dao.DAOManager;
-import com.epam.audiomanager.database.dao.impl.UserDAOImpl;
+import com.epam.audiomanager.database.dao.DaoManager;
+import com.epam.audiomanager.database.dao.impl.UserDaoImpl;
 import com.epam.audiomanager.entity.user.User;
 import com.epam.audiomanager.exception.ProjectException;
 import org.apache.logging.log4j.LogManager;
@@ -11,8 +11,8 @@ public class RegisterLogic {
     private static final Logger LOGGER = LogManager.getLogger(RegisterLogic.class);
 
     public static void registerNewClient(User user, String encryptedPassword) throws ProjectException {
-        DAOManager daoManager = new DAOManager();
-        UserDAOImpl userDAO = new UserDAOImpl();
+        DaoManager daoManager = new DaoManager();
+        UserDaoImpl userDAO = new UserDaoImpl();
 
         try {
             daoManager.startDAO(userDAO);

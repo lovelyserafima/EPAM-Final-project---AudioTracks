@@ -33,4 +33,7 @@ public class ConstantMessages {
     public static final String ALREADY_EXISTING_ALBUM = "message.alreadyExistingAlbum";
     public static final String ALREADY_EXISTING_TRACK = "message.alreadyExistingTrack";
     public static final String ORDER_WAS_SUCCESSFULLY_CANCELED = "message.orderWasSuccessfullyCanceled";
+    public static final String WRONG_USER_LENGTH = "message.wrongUserName";
+    public static final String WRONG_TOO_MUCH_TOP_UP = "message.ToMuchTopUp";
+    public static final String WRONG_TYPE_OF_TOPPING_UP = "message.wrongTopUp";
 }

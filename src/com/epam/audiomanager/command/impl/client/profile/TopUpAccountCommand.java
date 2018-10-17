@@ -15,13 +15,3 @@ public class TopUpAccountCommand implements Command{
         return router;
     }
 }
-
-    /*Router router = new Router();
-    HttpSession httpSession = httpServletRequest.getSession();
-        router.setPagePath(ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_PROFILE));
-
-                Client client = (Client) httpSession.getAttribute(ConstantAttributes.USER);
-                BigDecimal clientMoney = client.getMoney();
-                ChangeParametresLogic.topUpAccount(client.getId(), clientMoney, BigDecimal.valueOf(-CHANGES));
-                client.setMoney(BigDecimal.valueOf(clientMoney.doubleValue() + CHANGES));
-                return router;*/

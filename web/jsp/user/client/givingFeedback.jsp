@@ -49,6 +49,7 @@
     <div class="row content">
         <div class="col-sm-3 sidenav hidden-xs">
             <h2>LYUPAudio</h2>
+            <h4><fmt:message key="label.client"/></h4>
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/controller?command=main"><fmt:message key="label.main"/></a></li>
                 <li><a href="/controller?command=search"><fmt:message key="label.search"/></a></li>
@@ -70,7 +71,9 @@
                     <div class="form-group">
                         <label for="comment"><fmt:message key="label.reply"/>:</label>
                         <textarea class="form-control" name="reply" rows="5" id="comment"
-                                  placeholder="<fmt:message key="label.writeSmth"/>" required></textarea>
+                                  placeholder="<fmt:message key="label.writeSmth"/>" required maxlength="3000">
+
+                        </textarea>
                     </div>
                     <button type="submit" value="Confirm feedback" name="command">
                         <fmt:message key="label.giveFeedback"/>

@@ -37,6 +37,7 @@
                required/>
         <input name="secondName" type="text" placeholder="<fmt:message key="label.secondName" bundle="${var}"/>"
                required/>
+        <error>${wrongUserName}</error>
         <input type="hidden" name="command" value="Register"/>
         <input id="submit" type="submit" value="<fmt:message key="label.register" bundle="${var}"/>"/>
     </fieldset>

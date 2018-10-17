@@ -3,7 +3,6 @@ package com.epam.audiomanager.command.impl.admin;
 import com.epam.audiomanager.command.Command;
 import com.epam.audiomanager.controller.Router;
 import com.epam.audiomanager.exception.ProjectException;
-import com.epam.audiomanager.util.constant.ConstantAttributes;
 import com.epam.audiomanager.util.constant.ConstantPathPages;
 import com.epam.audiomanager.util.property.ConfigurationManager;
 import javax.servlet.http.HttpServletRequest;

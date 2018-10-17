@@ -4,32 +4,20 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Client extends User {
-    private boolean bonus;
-    private BigDecimal money = BigDecimal.valueOf(500);
+    private BigDecimal money;
 
     public Client() {
         super();
     }
 
-    public Client(String email, String login, String firstName, String secondName, TypeUser typeUser, boolean bonus) {
+    public Client(String email, String login, String firstName, String secondName, TypeUser typeUser) {
         super(login, typeUser, firstName, secondName, email);
-        this.bonus = bonus;
     }
 
-    public Client(int id, String login, TypeUser type, String firstName, String secondName, String email, boolean bonus,
-                  BigDecimal money)
-    {
+    public Client(int id, String login, TypeUser type, String firstName, String secondName, String email,
+                  BigDecimal money) {
         super(id, login, type, firstName, secondName, email);
-        this.bonus = bonus;
         this.money = money;
-    }
-
-    public boolean isBonus() {
-        return bonus;
-    }
-
-    public void setBonus(boolean bonus) {
-        this.bonus = bonus;
     }
 
     public BigDecimal getMoney() {
@@ -46,20 +34,18 @@ public class Client extends User {
         if (!(o instanceof Client)) return false;
         if (!super.equals(o)) return false;
         Client client = (Client) o;
-        return isBonus() == client.isBonus() &&
-                Objects.equals(getMoney(), client.getMoney());
+        return Objects.equals(getMoney(), client.getMoney());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), isBonus(), getMoney());
+        return Objects.hash(super.hashCode(), getMoney());
     }
 
     @Override
     public String toString() {
         return "Client{" +
-                "bonus=" + bonus +
-                ", money=" + money +
+                "money=" + money +
                 '}';
     }
 }

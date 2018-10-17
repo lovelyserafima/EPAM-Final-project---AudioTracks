@@ -26,6 +26,10 @@ public class ConfirmAddingNewAlbum implements Command {
                 ConstantAttributes.CHANGE_LANGUAGE));
         String page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_ADD_NEW_ALBUM);
 
+        httpServletRequest.setAttribute(ConstantAttributes.ALREADY_EXISTS_ALBUM, null);
+        httpServletRequest.setAttribute(ConstantAttributes.WRONG_PRICE, null);
+        httpServletRequest.setAttribute(ConstantAttributes.WRONG_YEAR, null);
+
         if (Validation.isCorrectYear(year)){
             BigDecimal price = BigDecimal.valueOf(Double.parseDouble(httpServletRequest.getParameter(
                     ConstantAttributes.PRICE)));
