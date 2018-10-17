@@ -34,6 +34,8 @@ public class BasketCommand implements Command {
             httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_WRONG_BUYING,
                     messageManager.getMessage(ConstantMessages.EMPTY_BASKET));
         }
+        httpSession.setAttribute(ConstantAttributes.RESULT_OF_SUCCESSFULL_ACTION, null);
+        httpSession.setAttribute(ConstantAttributes.RESULT_OF_WRONG_BUYING, null);
         router.setPagePath(ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_BASKET));
         return router;
     }

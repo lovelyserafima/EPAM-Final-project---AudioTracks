@@ -31,23 +31,22 @@ public class BuyCommand implements Command {
         BigDecimal clientMoney = client.getMoney();
         BigDecimal priceAudio = BuyLogic.isEnoughMoney(clientMoney, audioId);
 
-        if (priceAudio.doubleValue() > 0){
+        if (priceAudio.doubleValue() >= 0){
             BuyLogic.buyAudioTrack(clientId, audioId, clientMoney, priceAudio);
             client.setMoney(BigDecimal.valueOf(clientMoney.doubleValue() - priceAudio.doubleValue()));
 
-            List<AudioTrack> leftAudioTracks = BasketLogic.findAllOrders(clientId);
-            httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS, leftAudioTracks);
-            httpSession.setAttribute(ConstantAttributes.AUDIO_TRACKS, leftAudioTracks);
-            httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_SUCCESSFULL_ACTION,
+            httpSession.setAttribute(ConstantAttributes.RESULT_OF_SUCCESSFULL_ACTION,
                     messageManager.getMessage(ConstantMessages.TRACK_WAS_BOUGHT_SUCCESSFULLY));
             httpSession.setAttribute(ConstantAttributes.USER, client);
         } else {
-            httpServletRequest.setAttribute(ConstantAttributes.RESULT_OF_WRONG_BUYING, messageManager.getMessage(
+            httpSession.setAttribute(ConstantAttributes.RESULT_OF_WRONG_BUYING, messageManager.getMessage(
                     ConstantMessages.NOT_ENOUGH_MONEY));
-            httpServletRequest.setAttribute(ConstantAttributes.AUDIO_TRACKS, httpSession.getAttribute(
-                    ConstantAttributes.AUDIO_TRACKS));
         }
-        //router.setRouteTypeRedirect();
+
+        List<AudioTrack> leftAudioTracks = BasketLogic.findAllOrders(clientId);
+        httpSession.setAttribute(ConstantAttributes.AUDIO_TRACKS, leftAudioTracks);
+
+        router.setRouteTypeRedirect();
         router.setPagePath(ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_BASKET));
         return router;
 

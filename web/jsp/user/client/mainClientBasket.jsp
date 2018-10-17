@@ -82,7 +82,7 @@
                     <tbody>
                     <p class="text-danger">${resultOfWrongBuying}</p>
                     <p class="text-success">${resultOfSuccessfullAction}</p>
-                    <c:forEach items="${requestScope.audioTracks}" var="audioTrack">
+                    <c:forEach items="${audioTracks}" var="audioTrack">
                         <tr>
                             <td>${audioTrack.id}</td>
                             <td>${audioTrack.name}</td>
