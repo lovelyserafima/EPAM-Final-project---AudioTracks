@@ -24,9 +24,11 @@ public class ConfirmEditingPasswordCommand implements Command {
         String oldPassword = String.valueOf(httpSession.getAttribute(ConstantAttributes.PASSWORD));
         String enteredOldPassword = httpServletRequest.getParameter(ConstantAttributes.PASSWORD);
         String page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_CHANGE_PASSWORD);
-        httpSession.setAttribute(ConstantAttributes.ERROR_NOT_SAME_PASSWORDS, null);
-        httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_PASSWORD, null);
-        httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_TYPE_OF_PASSWORD, null);
+
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_NOT_SAME_PASSWORDS, null);
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_PASSWORD, null);
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_TYPE_OF_PASSWORD, null);
+
         if (oldPassword.equals(enteredOldPassword)){
             String newPassword = httpServletRequest.getParameter(ConstantAttributes.NEW_PASSWORD);
             if (Validation.isCorrectPassword(newPassword)){
@@ -34,20 +36,20 @@ public class ConfirmEditingPasswordCommand implements Command {
                         ConstantAttributes.SAME_PASSWORD))){
                     String login = ((User) httpSession.getAttribute(ConstantAttributes.USER)).getLogin();
                     ChangeParametresLogic.changePassword(login, Encryption.encryptPassword(newPassword));
-                    httpSession.setAttribute(ConstantAttributes.PASSWORD, newPassword);
-                    httpSession.setAttribute(ConstantAttributes.RESULT_CHANGING,
+                    httpServletRequest.setAttribute(ConstantAttributes.PASSWORD, newPassword);
+                    httpServletRequest.setAttribute(ConstantAttributes.RESULT_CHANGING,
                             messageManager.getMessage(ConstantMessages.PATH_RESULT_CHANGING_PASSWORD));
                     page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_PROFILE);
                 } else {
-                    httpSession.setAttribute(ConstantAttributes.ERROR_NOT_SAME_PASSWORDS,
+                    httpServletRequest.setAttribute(ConstantAttributes.ERROR_NOT_SAME_PASSWORDS,
                             messageManager.getMessage(ConstantMessages.PATH_ERROR_NOT_THE_SAME_PASSWORDS));
                 }
             } else {
-                httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_TYPE_OF_PASSWORD,
+                httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_TYPE_OF_PASSWORD,
                         messageManager.getMessage(ConstantMessages.PATH_ERROR_WRONG_TYPE_OF_PASSWORD));
             }
         } else {
-            httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_PASSWORD,
+            httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_PASSWORD,
                     messageManager.getMessage(ConstantMessages.PATH_ERROR_NOT_EXISTING_PASSWORD));
         }
         Router router = new Router();

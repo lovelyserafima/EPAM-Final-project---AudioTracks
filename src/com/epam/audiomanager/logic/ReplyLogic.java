@@ -7,6 +7,8 @@ import com.epam.audiomanager.exception.ProjectException;
 import java.util.List;
 
 public class ReplyLogic {
+    private ReplyLogic(){}
+
     public static boolean isFeedbackExists(int user_id, int audio_id) throws ProjectException {
         DaoManager daoManager = new DaoManager();
         ReplyDaoImpl replyDaoImpl = new ReplyDaoImpl();

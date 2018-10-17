@@ -32,7 +32,7 @@ public class ConfirmRegistrationCommand implements Command {
             httpSession.setAttribute(ConstantAttributes.LOGIN, client.getLogin());
             httpSession.setAttribute(ConstantAttributes.USER, client);
         } else {
-            httpSession.setAttribute(ConstantAttributes.ERROR_CONFIRM_CODE,
+            httpServletRequest.setAttribute(ConstantAttributes.ERROR_CONFIRM_CODE,
                     messageManager.getMessage(ConstantMessages.PATH_ERROR_WRONG_CONFIRM_CODE));
             page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_CONFIRM);
         }

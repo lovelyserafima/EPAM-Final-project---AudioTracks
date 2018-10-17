@@ -5,6 +5,8 @@ import com.epam.audiomanager.database.dao.impl.UserDaoImpl;
 import com.epam.audiomanager.exception.ProjectException;
 
 public class LoginLogic {
+    private LoginLogic(){}
+
     public static boolean isLoginExists(String login) throws ProjectException {
         DaoManager daoManager = new DaoManager();
         UserDaoImpl userDAO = new UserDaoImpl();

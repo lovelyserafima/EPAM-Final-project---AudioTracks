@@ -5,6 +5,8 @@ import com.epam.audiomanager.database.dao.impl.UserDaoImpl;
 import com.epam.audiomanager.exception.ProjectException;
 
 public class EmailLogic {
+    private EmailLogic(){}
+
     public static boolean isEmailExists(String email) throws ProjectException {
         DaoManager daoManager = new DaoManager();
         UserDaoImpl userDAO = new UserDaoImpl();

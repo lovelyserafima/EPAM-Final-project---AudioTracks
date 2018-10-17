@@ -9,6 +9,8 @@ import com.epam.audiomanager.exception.ProjectException;
 import java.math.BigDecimal;
 
 public class BuyLogic {
+    private BuyLogic(){}
+
     public static BigDecimal isEnoughMoney(BigDecimal clientMoney, int audioId) throws ProjectException {
         DaoManager daoManager = new DaoManager();
         UserDaoImpl userDAO = new UserDaoImpl();

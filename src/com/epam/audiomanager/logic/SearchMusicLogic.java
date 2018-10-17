@@ -8,6 +8,8 @@ import com.epam.audiomanager.exception.ProjectException;
 import java.util.List;
 
 public class SearchMusicLogic {
+    private SearchMusicLogic(){}
+
     public static List<AudioTrack> findAllTracks() throws ProjectException {
         List<AudioTrack> audioTracks;
 

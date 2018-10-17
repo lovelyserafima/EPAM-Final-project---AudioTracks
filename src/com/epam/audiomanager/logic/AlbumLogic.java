@@ -6,6 +6,7 @@ import com.epam.audiomanager.exception.ProjectException;
 import java.math.BigDecimal;
 
 public class AlbumLogic {
+    private AlbumLogic(){}
 
     public static boolean isAlbumExists(String name, String band, int year) throws ProjectException {
         DaoManager daoManager = new DaoManager();
@@ -32,6 +33,4 @@ public class AlbumLogic {
             daoManager.endDAO();
         }
     }
-
-    //public static int getAlbumIdByNameAndBand()
 }

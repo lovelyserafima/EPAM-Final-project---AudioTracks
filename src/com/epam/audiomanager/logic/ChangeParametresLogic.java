@@ -4,10 +4,11 @@ import com.epam.audiomanager.database.dao.DaoManager;
 import com.epam.audiomanager.database.dao.impl.UserDaoImpl;
 import com.epam.audiomanager.entity.user.Client;
 import com.epam.audiomanager.exception.ProjectException;
-
 import java.math.BigDecimal;
 
 public class ChangeParametresLogic {
+    private ChangeParametresLogic(){}
+
     public static boolean changeParametresLogic(Client user, String oldLogin) throws ProjectException {
         DaoManager daoManager = new DaoManager();
         UserDaoImpl userDAO = new UserDaoImpl();

@@ -9,6 +9,8 @@ import com.epam.audiomanager.exception.ProjectException;
 import java.math.BigDecimal;
 
 public class AudioLogic {
+    private AudioLogic(){}
+
     public static AudioTrack findAudioTrack(int audioId) throws ProjectException {
         DaoManager daoManager = new DaoManager();
         AudioTrackDaoImpl audioTrackDaoImpl = new AudioTrackDaoImpl();

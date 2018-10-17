@@ -10,7 +10,7 @@ public class ActionFactory {
     private static final String REPLACEMENT = "_";
     private static Command command = new DefaultCommand();
 
-    public Command defineCommand(HttpServletRequest httpServletRequest){
+    public static Command defineCommand(HttpServletRequest httpServletRequest){
         String action = httpServletRequest.getParameter(COMMAND).replace(TARGET, REPLACEMENT).toUpperCase();
 
         if (action.isEmpty()){

@@ -13,7 +13,6 @@ import javax.mail.internet.MimeMessage;
 import java.util.ResourceBundle;
 
 public class EmailConfirmLogic extends Thread {
-
     private static final Logger LOG = LogManager.getLogger(EmailConfirmLogic.class);
 
     private MimeMessage message;

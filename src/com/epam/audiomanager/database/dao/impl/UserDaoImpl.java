@@ -56,7 +56,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return null;
@@ -77,7 +76,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return false;
@@ -98,7 +96,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return false;
@@ -123,7 +120,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return false;
@@ -151,7 +147,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return false;
@@ -171,7 +166,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -194,7 +188,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return BigDecimal.valueOf(-1);
@@ -239,7 +232,6 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }

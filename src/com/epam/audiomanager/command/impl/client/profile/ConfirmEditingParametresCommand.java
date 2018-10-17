@@ -13,7 +13,6 @@ import com.epam.audiomanager.util.constant.ConstantPathPages;
 import com.epam.audiomanager.util.property.ConfigurationManager;
 import com.epam.audiomanager.util.property.MessageManager;
 import com.epam.audiomanager.util.valid.Validation;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,39 +26,39 @@ public class ConfirmEditingParametresCommand implements Command {
         String oldEmail = user.getEmail();
         String enteredEmail = httpServletRequest.getParameter(ConstantAttributes.EMAIL);
         String page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_CHANGE_PARAMETRES);
-        httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, null);
-        httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN, null);
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, null);
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN, null);
         if (!oldEmail.equals(enteredEmail)) {
             if (!EmailLogic.isEmailExists(enteredEmail)) {
-                page = checkParametres(user, httpServletRequest, enteredEmail, httpSession, page, messageManager);
+                page = checkParametres(user, httpServletRequest, enteredEmail, page, messageManager);
             } else {
-                httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, messageManager.getMessage(
+                httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_EMAIL, messageManager.getMessage(
                         ConstantMessages.PATH_ERROR_EXISTING_EMAIL));
             }
         } else {
-            page = checkParametres(user, httpServletRequest, enteredEmail, httpSession, page, messageManager);
+            page = checkParametres(user, httpServletRequest, enteredEmail, page, messageManager);
         }
         Router router = new Router();
         router.setPagePath(page);
         return router;
     }
 
-    private String checkParametres(Client user, HttpServletRequest httpServletRequest, String enteredEmail,
-                                 HttpSession httpSession, String page, MessageManager messageManager)
+    private String checkParametres(Client user, HttpServletRequest httpServletRequest, String enteredEmail, String page,
+                                   MessageManager messageManager)
             throws ProjectException {
         String oldLogin = user.getLogin();
         String enteredLogin = Validation.replaceScript(httpServletRequest.getParameter(ConstantAttributes.LOGIN));
         if (!oldLogin.equals(enteredLogin)) {
             if (!LoginLogic.isLoginExists(enteredLogin)) {
-                prepareParametres(user, enteredEmail, enteredLogin, httpServletRequest, httpSession, page);
+                prepareParametres(user, enteredEmail, enteredLogin, httpServletRequest);
                 ChangeParametresLogic.changeParametresLogic(user, oldLogin);
                 page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_PROFILE);
             } else {
-                httpSession.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN,
+                httpServletRequest.setAttribute(ConstantAttributes.ERROR_WRONG_LOGIN,
                         messageManager.getMessage(ConstantMessages.PATH_ERROR_EXISTING_LOGIN));
             }
         } else {
-            prepareParametres(user, enteredEmail, enteredLogin, httpServletRequest, httpSession, page);
+            prepareParametres(user, enteredEmail, enteredLogin, httpServletRequest);
             ChangeParametresLogic.changeParametresLogic(user, oldLogin);
             page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_MAIN_CLIENT_PROFILE);
         }
@@ -67,12 +66,12 @@ public class ConfirmEditingParametresCommand implements Command {
     }
 
     private void prepareParametres(Client user, String enteredEmail, String enteredLogin,
-                                   HttpServletRequest httpServletRequest, HttpSession httpSession, String page) {
+                                   HttpServletRequest httpServletRequest) {
         user.setEmail(enteredEmail);
         user.setLogin(enteredLogin);
         user.setFirstName(Validation.replaceScript(httpServletRequest.getParameter(ConstantAttributes.FIRST_NAME)));
         user.setSecondName(Validation.replaceScript(httpServletRequest.getParameter(ConstantAttributes.SECOND_NAME)));
-        httpSession.setAttribute(ConstantAttributes.USER, user);
-        httpSession.setAttribute(ConstantAttributes.LOGIN, user.getLogin());
+        httpServletRequest.setAttribute(ConstantAttributes.USER, user);
+        httpServletRequest.setAttribute(ConstantAttributes.LOGIN, user.getLogin());
     }
 }

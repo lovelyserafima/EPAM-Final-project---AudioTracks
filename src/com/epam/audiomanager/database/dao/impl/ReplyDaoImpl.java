@@ -30,7 +30,6 @@ public class ReplyDaoImpl extends AbstractDao implements ReplyDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -49,7 +48,6 @@ public class ReplyDaoImpl extends AbstractDao implements ReplyDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -76,7 +74,6 @@ public class ReplyDaoImpl extends AbstractDao implements ReplyDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return replies;

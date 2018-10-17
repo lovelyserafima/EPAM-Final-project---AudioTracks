@@ -42,7 +42,6 @@ public class MediaLibraryDaoImpl extends AbstractDao implements MediaLibraryDao 
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return audioTracks;
@@ -61,7 +60,6 @@ public class MediaLibraryDaoImpl extends AbstractDao implements MediaLibraryDao 
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -82,7 +80,6 @@ public class MediaLibraryDaoImpl extends AbstractDao implements MediaLibraryDao 
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return users;

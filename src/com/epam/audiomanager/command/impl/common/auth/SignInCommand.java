@@ -21,7 +21,7 @@ public class SignInCommand implements Command {
         HttpSession httpSession = httpServletRequest.getSession();
         MessageManager messageManager = MessageManager.defineLocale((String) httpSession.getAttribute(
                 ConstantAttributes.CHANGE_LANGUAGE));
-        httpSession.setAttribute(ConstantAttributes.ERROR_SIGN_IN_MESSAGE, null);
+        httpServletRequest.setAttribute(ConstantAttributes.ERROR_SIGN_IN_MESSAGE, null);
 
         String email = httpServletRequest.getParameter(ConstantAttributes.EMAIL);
         String password = httpServletRequest.getParameter(ConstantAttributes.PASSWORD);

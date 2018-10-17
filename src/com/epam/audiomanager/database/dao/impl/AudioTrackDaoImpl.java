@@ -56,7 +56,6 @@ public class AudioTrackDaoImpl extends AbstractDao implements AudioTrackDao {
         } finally {
             if (connection != null){
                 close(statement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return audioTracks;
@@ -82,7 +81,6 @@ public class AudioTrackDaoImpl extends AbstractDao implements AudioTrackDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return audioTrack;
@@ -111,7 +109,6 @@ public class AudioTrackDaoImpl extends AbstractDao implements AudioTrackDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return audioTracks;
@@ -129,7 +126,6 @@ public class AudioTrackDaoImpl extends AbstractDao implements AudioTrackDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -154,7 +150,6 @@ public class AudioTrackDaoImpl extends AbstractDao implements AudioTrackDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -171,7 +166,6 @@ public class AudioTrackDaoImpl extends AbstractDao implements AudioTrackDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -190,7 +184,6 @@ public class AudioTrackDaoImpl extends AbstractDao implements AudioTrackDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -214,7 +207,6 @@ public class AudioTrackDaoImpl extends AbstractDao implements AudioTrackDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -237,7 +229,6 @@ public class AudioTrackDaoImpl extends AbstractDao implements AudioTrackDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }

@@ -25,7 +25,6 @@ public class DaoManager {
         try{
             connection.setAutoCommit(false);
         } catch (SQLException e) {
-            LOGGER.error("SQLException", e);
             throw new ProjectException("SQLException", e);
         }
         abstractDao.setConnection(connection);

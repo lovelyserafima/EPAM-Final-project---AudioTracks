@@ -5,10 +5,11 @@ import com.epam.audiomanager.database.dao.impl.MediaLibraryDaoImpl;
 import com.epam.audiomanager.entity.audio.AudioTrack;
 import com.epam.audiomanager.entity.user.User;
 import com.epam.audiomanager.exception.ProjectException;
-
 import java.util.List;
 
 public class MediaLibraryLogic {
+    private MediaLibraryLogic(){}
+
     public static List<AudioTrack> findAllUserTracks(int id) throws ProjectException {
         List<AudioTrack> audioTracks;
 

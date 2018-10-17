@@ -7,6 +7,8 @@ import com.epam.audiomanager.exception.ProjectException;
 import com.epam.audiomanager.util.Encryption;
 
 public class SignInLogic {
+    private SignInLogic(){}
+
     public static User isUserExists(String email, String password) throws ProjectException {
         DaoManager daoManager = new DaoManager();
         UserDaoImpl userDAO = new UserDaoImpl();

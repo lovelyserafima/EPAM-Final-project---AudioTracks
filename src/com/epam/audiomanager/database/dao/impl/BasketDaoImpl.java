@@ -41,7 +41,6 @@ public class BasketDaoImpl extends AbstractDao implements BasketDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -67,7 +66,6 @@ public class BasketDaoImpl extends AbstractDao implements BasketDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return audioTracks;
@@ -94,7 +92,6 @@ public class BasketDaoImpl extends AbstractDao implements BasketDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return false;
@@ -114,7 +111,6 @@ public class BasketDaoImpl extends AbstractDao implements BasketDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -133,7 +129,6 @@ public class BasketDaoImpl extends AbstractDao implements BasketDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -151,7 +146,6 @@ public class BasketDaoImpl extends AbstractDao implements BasketDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -172,7 +166,6 @@ public class BasketDaoImpl extends AbstractDao implements BasketDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return users;

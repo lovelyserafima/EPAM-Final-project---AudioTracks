@@ -33,7 +33,6 @@ public class AlbumDaoImpl extends AbstractDao implements AlbumDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
         return id;
@@ -54,7 +53,6 @@ public class AlbumDaoImpl extends AbstractDao implements AlbumDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }
@@ -74,7 +72,6 @@ public class AlbumDaoImpl extends AbstractDao implements AlbumDao {
         } finally {
             if (connection != null){
                 close(preparedStatement);
-                ConnectionPool.getInstance().releaseConnection(connection);
             }
         }
     }

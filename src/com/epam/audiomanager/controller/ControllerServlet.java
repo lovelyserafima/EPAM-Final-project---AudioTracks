@@ -34,8 +34,7 @@ public class ControllerServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
         Router router;
-        ActionFactory actionFactory = new ActionFactory();
-        Command command = actionFactory.defineCommand(request);
+        Command command = ActionFactory.defineCommand(request);
 
         try {
             router = command.execute(request);
@@ -48,6 +47,9 @@ public class ControllerServlet extends HttpServlet {
                     case REDIRECT:
                         response.sendRedirect(request.getContextPath() + router.getPagePath());
                         break;
+                    default:
+                        //log.error
+                        throw new ProjectException("Unknown router type");
                 }
             } else {
                 String page = ConfigurationManager.getProperty(ConstantPathPages.PATH_PAGE_LOGIN);
@@ -57,12 +59,11 @@ public class ControllerServlet extends HttpServlet {
             LOGGER.error("ProjectError", e);
             throw new ServletException(e);
         }
-
     }
 
     @Override
     public void destroy() {
-        AbandonedConnectionCleanupThread.checkedShutdown();
+        AbandonedConnectionCleanupThread.checkedShutdown();//?
         ConnectionPool.getInstance().closePool();
     }
 }

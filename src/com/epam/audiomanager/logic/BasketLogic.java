@@ -8,6 +8,8 @@ import com.epam.audiomanager.exception.ProjectException;
 import java.util.List;
 
 public class BasketLogic {
+    private BasketLogic(){}
+
     public static boolean insertOrder(int clientId, int audioTrackId) throws ProjectException {
         DaoManager daoManager = new DaoManager();
         BasketDaoImpl basketDaoImpl = new BasketDaoImpl();
