@@ -32,7 +32,7 @@ public class Validation {
     public static String replaceScript(String value){
         return value.replaceAll(REPLACE_SCRIPT, "");
     }
-    public static boolean isCorrectUserName(String userName){ return userName.length() > MAX_LENGTH_USER_NAME;}
+    public static boolean isCorrectUserName(String userName){ return userName.length() <= MAX_LENGTH_USER_NAME;}
     public static boolean isCorrectTopUp(BigDecimal value){ return value.doubleValue() > 0;}
     public static boolean isTopUpLessThanMax(BigDecimal value){
         return value.doubleValue() <= MAX_TOP_UP;
